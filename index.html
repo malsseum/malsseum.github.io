@@ -1,0 +1,1833 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7A1F2B">
+<title>오늘의 말씀</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="오늘의 말씀">
+<meta name="description" content="교황님 말씀을 쉬운 말로 읽고 듣기">
+<meta property="og:type" content="website">
+<meta property="og:title" content="오늘의 말씀">
+<meta property="og:description" content="교황님 말씀을 쉬운 말로 읽고 듣기">
+<meta property="og:image" content="https://malsseum.github.io/icon-512.png">
+<meta property="og:url" content="https://malsseum.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 성당 느낌: 양피지 바탕, 포도주빛(전례 홍색)과 금색, 아치형 창, 십자 장식 */
+:root {
+  --bg: #F6EFE2;
+  --bg2: #EFE4D0;
+  --surface: #FFFCF6;
+  --ink: #2B1E18;
+  --muted: #6A574A;
+  --line: #E3D3B8;
+  --green: #7A1F2B;      /* 주 색: 포도주빛(이름은 예전 그대로 둠) */
+  --green-soft: #F6E7E2;
+  --gold: #A67C2E;
+  --gold-soft: #F4E7C9;
+  --on-green: #FFF8EC;
+  --pope: #8A6418;
+  --cardinal: #A3262A;
+  --bishop: #6B3F8E;
+  --display: "Gowun Batang", "Nanum Myeongjo", "Batang", serif;
+  --body: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  --fs: 21px;
+  --shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 6px 18px rgba(90,60,30,.10);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17110F; --bg2: #1F1714; --surface: #231A16; --ink: #F3EADF; --muted: #C2B2A2; --line: #3D2F27;
+    --green: #E3A0A4; --green-soft: #3A2124; --gold: #E1BC72; --gold-soft: #3A2E1A; --on-green: #1B1210;
+    --pope: #E1BC72; --cardinal: #F08A84; --bishop: #C9A6E8; color-scheme: dark;
+    --shadow: 0 6px 18px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17110F; --bg2: #1F1714; --surface: #231A16; --ink: #F3EADF; --muted: #C2B2A2; --line: #3D2F27;
+  --green: #E3A0A4; --green-soft: #3A2124; --gold: #E1BC72; --gold-soft: #3A2E1A; --on-green: #1B1210;
+  --pope: #E1BC72; --cardinal: #F08A84; --bishop: #C9A6E8; color-scheme: dark;
+  --shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root.big { --fs: 25px; }
+:root.bigger { --fs: 30px; }
+
+html { background: var(--bg); }
+body {
+  margin: 0;
+  background:
+    radial-gradient(120% 60% at 50% -10%, var(--gold-soft) 0%, transparent 60%),
+    linear-gradient(var(--bg), var(--bg2));
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--body); font-size: var(--fs); line-height: 1.7;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 18px calc(40px + env(safe-area-inset-bottom, 0px));
+  min-height: 100vh;
+  word-break: keep-all; overflow-wrap: break-word;
+}
+body.inner .mast { display: none; }
+.app { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+.stack { display: flex; flex-direction: column; gap: 22px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.35; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+button:focus-visible, a:focus-visible { outline: 4px solid var(--gold); outline-offset: 3px; }
+
+/* 맨 위 이름판 */
+.mast { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; padding-top: 6px; }
+.mast .cross { width: 34px; height: 46px; color: var(--gold); }
+.mast h1 { font-size: 1.55em; letter-spacing: .04em; color: var(--green); }
+.mast .sub { color: var(--muted); font-size: min(.78em, 3.9vw); white-space: nowrap; }
+.orn { display: flex; align-items: center; gap: 12px; width: 100%; color: var(--gold); margin-top: 10px; }
+.orn::before, .orn::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.orn svg { width: 14px; height: 14px; flex: none; }
+.today { display: flex; flex-direction: column; gap: 2px; align-items: center; }
+.today .date { font-family: var(--display); font-weight: 700; font-size: 1.05em; }
+.today .lit { color: var(--muted); font-size: .84em; display: flex; align-items: center; gap: 8px; }
+.chip { display: inline-block; width: .7em; height: .7em; border-radius: 50%; background: #2F6B4A; flex: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--line); }
+
+.controls { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 14px; }
+.textsize { display: flex; gap: 4px; align-items: center; justify-content: center; color: var(--muted); font-size: .72em; }
+.textsize > span { margin-right: 2px; }
+.textsize button {
+  border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px;
+  padding: 2px 10px; cursor: pointer; min-height: 36px;
+}
+.textsize button[aria-pressed="true"] { border-color: var(--gold); background: var(--gold-soft); font-weight: 700; }
+
+/* 새 말씀: 성당 아치 창 모양 */
+.big-btn {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  width: 100%; text-align: center; cursor: pointer;
+  background:
+    radial-gradient(90% 70% at 50% 0%, rgba(255,220,150,.22), transparent 70%),
+    linear-gradient(160deg, #8E2634, #5E1420);
+  color: #FFF8EC; border: none;
+  border-radius: 200px 200px 22px 22px / 120px 120px 22px 22px;
+  padding: 46px 26px 28px;
+  box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--gold), 0 14px 30px rgba(94,20,32,.28);
+}
+.big-btn::before {
+  content: ""; position: absolute; inset: 10px; pointer-events: none;
+  border: 1px solid rgba(240,210,150,.55);
+  border-radius: 190px 190px 14px 14px / 112px 112px 14px 14px;
+}
+.big-btn .k { font-size: .78em; color: #F3D9A4; letter-spacing: .02em; }
+.big-btn .t { font-family: var(--display); font-size: 1.38em; font-weight: 700; line-height: 1.35; }
+.big-btn .go {
+  font-weight: 700; font-size: .86em; margin-top: 8px; padding: 6px 20px; border-radius: 999px;
+  background: rgba(255,248,236,.14); border: 1px solid rgba(243,217,164,.6);
+}
+
+/* 누구 말씀 고르기 */
+.who-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.who-tabs button {
+  min-height: 60px; border-radius: 16px; border: 1.5px solid var(--line); background: var(--surface);
+  cursor: pointer; font-weight: 700; font-size: .92em; padding: 6px 10px; box-shadow: var(--shadow);
+}
+.who-tabs button[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+
+.section-title {
+  font-size: .9em; color: var(--green); font-weight: 700; letter-spacing: .02em;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-title::before { content: "✠"; color: var(--gold); font-size: .9em; }
+.list { display: flex; flex-direction: column; gap: 14px; }
+.item {
+  display: flex; flex-direction: column; gap: 6px; width: 100%; text-align: left; cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 18px 20px 18px 24px;
+  box-shadow: var(--shadow); position: relative; overflow: hidden;
+}
+.item::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--c, var(--gold)); }
+.item:has(.who.pope) { --c: var(--pope); }
+.item:has(.who.cardinal) { --c: var(--cardinal); }
+.item:has(.who.bishop) { --c: var(--bishop); }
+.who { font-weight: 700; font-size: .8em; display: flex; align-items: center; gap: 8px; }
+.who::before { content: "✝"; font-size: .95em; color: currentColor; flex: none; }
+.who.pope { color: var(--pope); }
+.who.cardinal { color: var(--cardinal); }
+.who.bishop { color: var(--bishop); }
+.who.gone { display: none; }
+.item .t { font-family: var(--display); font-weight: 700; font-size: 1.1em; line-height: 1.4; }
+.item .d { color: var(--muted); font-size: .8em; line-height: 1.5; }
+.item .d b { color: var(--ink); font-weight: 700; }
+/* 교황님 담화: 매일 말씀과 따로, 최근 3편 */
+.dam-sub { color: var(--muted); font-size: .8em; margin-top: -6px; }
+.item.dam { background: var(--gold-soft); --c: var(--gold); }
+.item.dam .for { color: var(--green); font-weight: 700; font-size: .84em; }
+.item.dam.dam-today { border: 2px solid var(--green); }
+.item.dam.dam-today .for { font-size: .95em; }
+
+.empty {
+  background: var(--surface); border: 2px dashed var(--line); border-radius: 18px; padding: 20px;
+  color: var(--muted); display: flex; flex-direction: column; gap: 12px;
+}
+
+/* 교구 고르기 */
+.diocese-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.linkbtn { background: none; border: none; color: var(--green); font-weight: 700; cursor: pointer; padding: 8px 0; text-decoration: underline; }
+.dio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.dio-grid button {
+  min-height: 60px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface);
+  cursor: pointer; font-weight: 700; font-size: .9em;
+}
+@media (max-width: 360px) { .dio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* 말씀 화면 */
+.back {
+  align-self: flex-start; background: var(--surface); border: 1.5px solid var(--line);
+  border-radius: 999px; padding: 8px 20px; min-height: 52px; cursor: pointer; font-weight: 700;
+}
+.head { display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center; }
+.head .speaker { font-size: .9em; }
+.head h2 { font-size: 1.5em; color: var(--ink); }
+
+/* 언제, 어디서, 어떤 자리, 출처 */
+.facts {
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 6px 18px;
+  box-shadow: var(--shadow); margin: 0;
+}
+.facts > div { display: grid; grid-template-columns: 3.9em 1fr; gap: 10px; padding: 10px 0; border-top: 1px dashed var(--line); align-items: baseline; }
+.facts > div:first-child { border-top: none; }
+.facts dt { color: var(--gold); font-weight: 700; font-size: .82em; }
+.facts dd { margin: 0; min-width: 0; font-size: .92em; }
+.facts dd b { font-weight: 700; }
+.src-btn {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 6px;
+  min-height: 48px; padding: 6px 18px; border-radius: 999px;
+  background: var(--green); color: var(--on-green); font-weight: 700; text-decoration: none; font-size: .9em;
+}
+.src-btn svg { width: 1.1em; height: 1.1em; }
+
+.listen {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; min-height: 72px; border-radius: 20px; cursor: pointer;
+  border: 2px solid var(--green); background: var(--green-soft); color: var(--green);
+  font-weight: 700; font-size: 1.05em;
+}
+.listen svg { width: 1.3em; height: 1.3em; flex: none; }
+
+.quote {
+  font-family: var(--display); font-size: 1.3em; font-weight: 700; line-height: 1.75;
+  position: relative; text-align: left; padding: 22px 20px; margin: 0;
+  background: var(--gold-soft); border-radius: 18px; color: var(--ink);
+  border-left: 8px solid var(--gold); word-break: keep-all; overflow-wrap: break-word;
+}
+.about { color: var(--ink); }
+.points { display: flex; flex-direction: column; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.points li { display: grid; grid-template-columns: 1.8em 1fr; gap: 10px; }
+.points li > span:first-child {
+  font-weight: 700; color: var(--on-green); background: var(--green); border-radius: 50%;
+  width: 1.5em; height: 1.5em; display: grid; place-items: center; font-size: .82em; margin-top: .2em;
+  font-variant-numeric: tabular-nums;
+}
+.points li > span:last-child { min-width: 0; }
+
+.todo {
+  background: var(--surface); border: 1.5px solid var(--gold); border-radius: 18px;
+  padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; box-shadow: var(--shadow);
+}
+.todo .k { font-weight: 700; color: var(--gold); font-size: .9em; }
+.todo .k small { font-weight: 400; color: var(--muted); font-size: .9em; }
+.ai-note { color: var(--muted); font-size: .85em; margin-top: -14px; }
+.todo .k::before { content: "🕯 "; }
+
+/* 교황님 사진 */
+.photo { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.photo img {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 18px;
+  border: 3px solid var(--surface); box-shadow: 0 0 0 1.5px var(--gold), var(--shadow); background: var(--line);
+}
+.photo.arch img { aspect-ratio: 4 / 3; border-radius: 160px 160px 18px 18px; object-position: center 30%; }
+.photo figcaption { font-size: .68em; color: var(--muted); text-align: right; }
+.photo-card {
+  display: flex; flex-direction: column; gap: 10px; width: 100%; text-align: center; cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--gold); border-radius: 26px; padding: 16px 16px 18px;
+  box-shadow: var(--shadow); color: inherit; font: inherit;
+}
+.photo-card .ph-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.photo-card .ph-head b { font-family: var(--display); color: var(--green); font-size: 1.05em; }
+.photo-card .ph-head span { color: var(--gold); font-size: .78em; font-weight: 700; }
+.photo-card .cap { font-weight: 700; line-height: 1.5; }
+.photo-card .cap small { display: block; font-weight: 400; color: var(--muted); font-size: .82em; }
+.photo-card .nm { display: flex; flex-direction: column; align-items: center; line-height: 1.35; }
+.photo-card .nm b { font-family: var(--display); font-size: 1.15em; }
+.photo-card .nm span { color: var(--muted); font-size: .82em; }
+.photo-card .pd { color: var(--muted); font-size: .8em; border-top: 1px solid var(--line); padding-top: 8px; }
+.radio-card .photo { margin-bottom: 6px; }
+
+/* 라디오 */
+.radio-entry {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 76px; text-align: left;
+  border-radius: 20px; border: 1.5px solid var(--gold); background: var(--surface); cursor: pointer;
+  padding: 12px 20px; font-weight: 700; box-shadow: var(--shadow);
+}
+.radio-entry svg { width: 1.5em; height: 1.5em; flex: none; color: var(--green); }
+.radio-entry small { display: block; font-weight: 400; color: var(--muted); font-size: .78em; }
+.radio-card {
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 22px; padding: 22px;
+  display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow);
+}
+.onair {
+  align-self: flex-start; font-size: .75em; font-weight: 700; padding: 2px 14px; border-radius: 999px;
+  border: 1.5px solid var(--line); color: var(--muted);
+}
+.onair.on { background: var(--green); border-color: var(--green); color: var(--on-green); }
+.radio-card .t { font-family: var(--display); font-weight: 700; font-size: 1.25em; line-height: 1.4; }
+.radio-card .d { color: var(--muted); font-size: .8em; }
+.tip { background: var(--gold-soft); border: 2px solid var(--gold); border-radius: 14px; padding: 16px 18px; color: var(--ink); line-height: 1.7; word-break: keep-all; text-align: left; }
+.tip p { margin: 0 0 8px; }
+.tip button { min-height: 52px; width: 100%; margin-top: 6px; font: inherit; font-weight: 700; border-radius: 12px; border: 2px solid var(--gold); background: var(--surface); color: var(--ink); cursor: pointer; }
+.radio-main {
+  display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; min-height: 96px;
+  border-radius: 24px; border: none; background: linear-gradient(160deg, #8E2634, #5E1420); color: #FFF8EC;
+  font-weight: 700; font-size: 1.2em; cursor: pointer; box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--gold);
+}
+.radio-main svg { width: 1.4em; height: 1.4em; flex: none; }
+.radio-main:disabled { opacity: .5; cursor: default; }
+/* v44: 준비 중엔 재생 단추 자리에 작은 동그라미가 돎(음악 앱들이 흔히 쓰는 방식) */
+.spin { display: inline-block; width: 1em; height: 1em; flex: none; border: .16em solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -.12em; margin-right: .35em; }
+.radio-main .spin { width: 1.2em; height: 1.2em; margin-right: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation-duration: 2.4s; } }
+.radio-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.radio-nav .again { grid-column: 1 / -1; }
+.share-app { width: 100%; margin: 4px 0 14px; }
+.radio-nav button {
+  min-height: 64px; border-radius: 16px; border: 1.5px solid var(--line); background: var(--surface);
+  font-weight: 700; cursor: pointer;
+}
+.playlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.playlist button {
+  width: 100%; text-align: left; background: none; border: 1.5px solid transparent; border-radius: 14px;
+  padding: 10px 14px; cursor: pointer; display: grid; grid-template-columns: 1.6em 1fr; gap: 8px; line-height: 1.5;
+}
+.playlist button > span:last-child { min-width: 0; }
+.playlist button[aria-current="true"] { border-color: var(--green); background: var(--green-soft); font-weight: 700; }
+.playlist .pd { display: block; color: var(--muted); font-size: .8em; font-weight: 400; margin-top: 2px; }
+.playlist .n { color: var(--gold); font-variant-numeric: tabular-nums; font-weight: 700; }
+@media (prefers-reduced-motion: no-preference) {
+  .onair.on { animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .6; } }
+}
+
+.script { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 14px 18px; }
+.script summary { cursor: pointer; font-weight: 700; color: var(--green); min-height: 44px; display: flex; align-items: center; }
+.script-body { display: flex; flex-direction: column; gap: 12px; padding-top: 12px; font-size: .92em; }
+.script-body .quote { font-size: 1.05em; padding: 12px 14px; text-align: left; }
+.script-body p { border-radius: 12px; padding: 6px 10px; margin: 0 -10px; transition: background .3s; }
+.script-body p.now { background: var(--gold-soft); box-shadow: inset 4px 0 0 var(--green); font-weight: 700; }
+.pause { color: var(--muted); font-size: .8em; }
+
+/* 목소리, 빠르기 고르기 */
+.pick { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.pick .k { font-weight: 700; font-size: .85em; color: var(--muted); }
+.pick-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pick-row.three { grid-template-columns: 1fr 1fr 1fr; }
+.pick-row.four { grid-template-columns: 1fr 1fr; }
+.sleep-left { color: var(--green); font-weight: 700; }
+.pick-row button {
+  border: 1.5px solid var(--line); background: var(--bg); border-radius: 14px; min-height: 56px;
+  padding: 6px 8px; cursor: pointer; font-size: .9em; line-height: 1.3;
+}
+.pick-row button[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); color: var(--green); font-weight: 700; }
+
+/* 아래쪽 재생창 */
+body.has-bar { padding-bottom: calc(230px + env(safe-area-inset-bottom, 0px)); }
+.nowbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: var(--surface); border-top: 1.5px solid var(--gold); border-radius: 22px 22px 0 0; box-shadow: 0 -8px 24px rgba(60,30,10,.16); }
+.nowbar[hidden] { display: none; }
+.nb-in { max-width: 640px; margin: 0 auto; padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 8px; }
+.nb-top { display: flex; align-items: center; gap: 10px; }
+.nb-t { flex: 1; font-weight: 700; font-size: .9em; line-height: 1.35; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+.nb-x { border: 1.5px solid var(--line); background: var(--bg); border-radius: 12px; min-height: 44px; padding: 0 14px; cursor: pointer; font-size: .85em; }
+#nb-seek { width: 100%; height: 32px; accent-color: var(--green); cursor: pointer; }
+.nb-time { display: flex; justify-content: space-between; font-size: .8em; color: var(--muted); font-variant-numeric: tabular-nums; margin-top: -6px; }
+.nb-btns { display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 8px; }
+.nb-btns button { border: 1.5px solid var(--line); background: var(--bg); border-radius: 14px; min-height: 60px; cursor: pointer; font-size: .85em; line-height: 1.25; }
+.nb-btns .nb-pp { border-color: var(--green); background: var(--green); color: var(--on-green); font-weight: 700; font-size: 1em; }
+
+/* 떠 있는 라디오 버블 */
+body.has-bub { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
+.bubble {
+  position: fixed; right: 16px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 9;
+  display: flex; align-items: center; gap: 8px; min-height: 56px; padding: 0 22px 0 16px;
+  border: none; border-radius: 999px; cursor: pointer; color: #FFF8EC; font-weight: 700; font-size: 1em; line-height: 1.2;
+  background: linear-gradient(160deg, #8E2634, #5E1420);
+  box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px var(--gold), 0 10px 24px rgba(60,20,10,.35);
+}
+.bubble[hidden] { display: none; }
+.bubble svg { width: 1.3em; height: 1.3em; flex: none; }
+.bubble small { display: block; font-weight: 400; font-size: .72em; opacity: .85; }
+.bubble:active { transform: scale(.96); }
+
+/* 카톡으로 보내기, 알림 한 줄 */
+.share {
+  display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;
+  width: 100%; min-height: 60px; border-radius: 20px; cursor: pointer;
+  border: 1.5px solid var(--gold); background: var(--surface); color: var(--ink, inherit); font-weight: 700; font-size: .95em;
+}
+.share svg { width: 1.25em; height: 1.25em; flex: none; color: var(--gold); }
+.toast {
+  position: fixed; left: 50%; bottom: calc(110px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 20;
+  max-width: calc(100% - 32px); width: max-content; padding: 12px 18px; border-radius: 14px;
+  background: #2A1A14; color: #FFF8EC; font-size: .9em; line-height: 1.5; box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
+.toast[hidden] { display: none; }
+
+/* 앱 설치 안내 */
+.install { background: var(--surface); border: 1.5px solid var(--gold); border-radius: 20px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); }
+.install[hidden] { display: none; }
+.install p { margin: 0; line-height: 1.55; font-size: .92em; }
+.install .go { min-height: 60px; border: none; border-radius: 16px; background: var(--green); color: var(--on-green); font-weight: 700; font-size: 1em; cursor: pointer; }
+.install .no { align-self: flex-end; border: none; background: none; color: var(--muted); font-size: .8em; min-height: 40px; cursor: pointer; text-decoration: underline; }
+
+.proto { color: var(--muted); font-size: .8em; border-top: 1px solid var(--line); padding: 16px 0 96px; line-height: 1.55; }
+.proto p { margin: 0 0 10px; }
+.proto .dedi { text-align: center; color: var(--ink, inherit); font-size: 1.25em; line-height: 1.6; margin: 4px 0 16px; }
+.proto .meta { font-size: .9em; opacity: .85; margin-top: 14px; }
+@media (prefers-reduced-motion: no-preference) {
+  .big-btn, .item, .listen { transition: transform .12s ease; }
+  .big-btn:active, .item:active, .listen:active { transform: scale(.985); }
+}
+
+/* ===== v43 깔끔한 화면(11/11): 흰 바탕, 포도주색 하나, 금색, 양피지, 아치 뺌. 기능은 그대로 ===== */
+:root {
+  --bg: #FAF9F7; --bg2: #FAF9F7; --surface: #FFFFFF; --ink: #1F1A17; --muted: #5C544E; --line: #E6E1DB;
+  --green: #8A1F2E; --green-soft: #F7ECEC; --gold: #8A1F2E; --gold-soft: #F4F1ED; --on-green: #FFFFFF;
+  --pope: #8A1F2E; --btn: #8A1F2E; --shadow: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141312; --bg2: #141312; --surface: #1E1C1B; --ink: #F2EEEA; --muted: #BDB4AC; --line: #36312E;
+    --green: #EBA6AC; --green-soft: #3A2427; --gold: #EBA6AC; --gold-soft: #262321; --on-green: #1A1212;
+    --pope: #EBA6AC; --btn: #93303D; --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141312; --bg2: #141312; --surface: #1E1C1B; --ink: #F2EEEA; --muted: #BDB4AC; --line: #36312E;
+  --green: #EBA6AC; --green-soft: #3A2427; --gold: #EBA6AC; --gold-soft: #262321; --on-green: #1A1212;
+  --pope: #EBA6AC; --btn: #93303D; --shadow: none;
+}
+body { background: var(--bg); }
+h1, h2, h3 { font-family: var(--body); letter-spacing: 0; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--green); }
+
+/* 맨 위: 십자, 장식줄 없이 이름과 날짜만 */
+.mast { align-items: flex-start; text-align: left; gap: 2px; padding-top: 4px; }
+.mast .cross, .orn { display: none; }
+.mast h1 { font-size: 1.5em; font-weight: 700; color: var(--ink); letter-spacing: 0; }
+.mast .sub { font-size: .8em; }
+.today { align-items: flex-start; margin-top: 10px; }
+.today .date { font-family: var(--body); font-size: 1em; }
+.chip { box-shadow: none; }
+.controls { justify-content: flex-start; gap: 6px 16px; }
+.textsize button { border-width: 1px; min-height: 40px; }
+.textsize button[aria-pressed="true"] { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+
+/* 사진 카드: 테두리 한 줄, 사진은 반듯하게 */
+.photo-card { border: 1px solid var(--line); border-radius: 16px; padding: 0 0 16px; gap: 10px; text-align: left; overflow: hidden; }
+.photo-card .ph-head { padding: 14px 18px 0; }
+.photo-card .ph-head b { font-family: var(--body); color: var(--ink); font-size: 1em; }
+.photo-card .ph-head span { color: var(--muted); font-weight: 400; }
+.photo-card .cap, .photo-card .pd { padding: 0 18px; }
+.photo-card .cap { font-weight: 500; font-size: .9em; line-height: 1.55; }
+.photo-card .pd { border-top: none; padding-top: 0; }
+.photo img { border: none; box-shadow: none; border-radius: 12px; }
+.photo.arch { margin: 0; }
+.photo.arch img { aspect-ratio: 16 / 10; border-radius: 0; }
+.photo.arch figcaption { padding: 0 18px; }
+
+/* 새 말씀: 아치 대신 반듯한 큰 단추 */
+.big-btn {
+  background: var(--btn); color: #FFFFFF; border-radius: 16px; box-shadow: none;
+  padding: 24px 22px; align-items: flex-start; text-align: left; gap: 6px;
+}
+.big-btn::before { display: none; }
+.big-btn .k { color: rgba(255,255,255,.88); font-size: .8em; }
+.big-btn .t { font-family: var(--body); font-size: 1.25em; }
+.big-btn .go { background: #FFFFFF; color: #8A1F2E; border: none; margin-top: 10px; padding: 10px 22px; }
+
+.radio-entry { border: 1px solid var(--line); border-radius: 16px; }
+.section-title { color: var(--ink); font-size: 1em; }
+.section-title::before { content: none; }
+.item { border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+.item::before { display: none; }
+.item .t { font-family: var(--body); }
+.item.dam { background: var(--surface); }
+.item.dam.dam-today { border: 2px solid var(--green); }
+.who::before { content: none; }
+
+/* 말씀 화면 */
+.back { border-width: 1px; }
+.head { align-items: flex-start; text-align: left; }
+.facts { border: 1px solid var(--line); border-radius: 16px; }
+.facts > div { border-top: 1px solid var(--line); }
+.facts dt { color: var(--muted); }
+.src-btn { background: var(--btn); color: #FFFFFF; }
+.listen { border-width: 1.5px; border-radius: 16px; }
+.quote { background: var(--gold-soft); border-left: 4px solid var(--green); border-radius: 12px; font-weight: 700; }
+.points li > span:first-child { background: var(--btn); color: #FFFFFF; }
+.todo { border: 1px solid var(--line); border-radius: 16px; }
+.todo .k { color: var(--green); }
+.todo .k::before { content: none; }
+.share { border: 1px solid var(--line); border-radius: 16px; }
+.share svg { color: var(--green); }
+.radio-card, .script, .pick { border-width: 1px; border-radius: 16px; }
+.tip { background: var(--gold-soft); border: 1px solid var(--line); }
+.tip button { border: 1px solid var(--line); }
+.radio-main { background: var(--btn); color: #FFFFFF; box-shadow: none; border-radius: 16px; }
+.radio-nav button, .pick-row button, .nb-btns button, .nb-x { border-width: 1px; }
+.nb-btns .nb-pp { background: var(--btn); border-color: var(--btn); color: #FFFFFF; }
+.playlist .n { color: var(--muted); }
+.nowbar { border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgba(0,0,0,.08); }
+.install { border: 1px solid var(--line); }
+.install .go { background: var(--btn); color: #FFFFFF; }
+
+/* 떠 있는 듣기 단추: 금테 없이 */
+.bubble { background: var(--btn); color: #FFFFFF; box-shadow: 0 4px 14px rgba(0,0,0,.22); }
+
+/* ===== v44 어르신 맞춤(11/11): v43의 정돈된 틀 + 처음의 따뜻한 크림색, 작은 금빛 십자 ===== */
+:root {
+  --bg: #F7F1E6; --bg2: #F7F1E6; --surface: #FFFDF8; --ink: #221A15; --muted: #4A3F37; --line: #E4D8C5;
+  --gold: #9A7328; --gold-soft: #F3EAD8; --warm: #9A7328;
+  --shadow: 0 2px 8px rgba(90,60,30,.07);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17120F; --bg2: #17120F; --surface: #221B17; --ink: #F5EDE3; --muted: #D3C6B8; --line: #3E322A;
+    --gold: #E1BC72; --gold-soft: #2C231C; --warm: #E1BC72; --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17120F; --bg2: #17120F; --surface: #221B17; --ink: #F5EDE3; --muted: #D3C6B8; --line: #3E322A;
+  --gold: #E1BC72; --gold-soft: #2C231C; --warm: #E1BC72; --shadow: none;
+}
+/* 맨 위: 가운데 정렬, 작은 금빛 십자, 날짜 크게 */
+.mast { align-items: center; text-align: center; gap: 4px; }
+.mast .cross { display: block; width: 22px; height: 30px; color: var(--warm); margin-bottom: 2px; }
+.mast h1 { color: var(--green); font-family: var(--display); font-size: 1.6em; }
+.mast .sub { font-size: .85em; }
+.today { align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); width: 100%; }
+.today .date { font-size: 1.1em; }
+.today .lit { font-size: .9em; color: var(--muted); }
+.controls { justify-content: center; gap: 8px 16px; }
+.textsize { font-size: .8em; color: var(--muted); }
+.textsize button { min-height: 48px; padding: 4px 14px; background: var(--surface); }
+
+/* 카드: 따뜻한 흰색, 옅은 그림자 */
+.photo-card, .item, .radio-entry, .facts, .todo, .share, .radio-card, .script, .pick, .install { box-shadow: var(--shadow); }
+.photo-card .ph-head b { color: var(--green); font-size: 1.05em; }
+.photo-card .ph-head span { color: var(--warm); font-weight: 700; }
+.photo-card .cap { font-size: .95em; }
+.photo-card .pd { color: var(--muted); font-size: .85em; }
+
+/* 새 말씀 단추: 더 크게, "읽기" 표시 분명히 */
+.big-btn { padding: 26px 22px; gap: 8px; }
+.big-btn .k { font-size: .85em; }
+.big-btn .t { font-size: 1.35em; line-height: 1.4; }
+.big-btn .go { font-size: .95em; padding: 12px 26px; }
+.big-btn .go::after { content: " ›"; }
+
+/* 듣기 입구: 동그란 포도주색 그림 */
+.radio-entry { min-height: 88px; gap: 16px; font-size: 1.05em; }
+.radio-entry svg { width: 2.2em; height: 2.2em; padding: .45em; border-radius: 50%; background: var(--btn); color: #FFFFFF; box-sizing: border-box; }
+.radio-entry small { font-size: .82em; color: var(--muted); }
+
+/* 묶음 제목: 금빛 짧은 줄 */
+.section-title { font-size: 1.1em; color: var(--ink); }
+.section-title::before { content: ""; width: 4px; height: 1.1em; border-radius: 2px; background: var(--warm); }
+.dam-sub { font-size: .88em; color: var(--muted); }
+.item .t { font-size: 1.15em; }
+.item .d { font-size: .88em; color: var(--muted); }
+.item.dam .for { color: var(--warm); font-size: .9em; }
+
+/* 말씀 화면 */
+.back { min-height: 56px; font-size: 1em; background: var(--surface); }
+.head h2 { font-family: var(--display); font-size: 1.55em; }
+.facts dt { color: var(--warm); font-size: .88em; }
+.quote { font-family: var(--display); font-size: 1.35em; background: var(--gold-soft); border-left-color: var(--warm); }
+.ai-note { font-size: .88em; }
+.todo { border: 1.5px solid var(--warm); }
+.todo .k { color: var(--warm); }
+.todo .k::before { content: "🕯 "; }
+.listen { min-height: 76px; font-size: 1.1em; }
+.share { min-height: 64px; }
+.proto { font-size: .88em; color: var(--muted); }
+/* v48 설정은 맨 아래로 */
+.to-set { display: block; margin: 0 auto; padding: 6px 12px; min-height: 44px; background: none; border: 0; color: var(--muted); font: inherit; font-size: .8em; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+body.inner .to-set { display: none; }
+.settings { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line, #e5ddd0); }
+.settings .section-title { margin: 0 0 12px; }
+.set-title { margin-top: 12px; }
+/* v50(11/13) 맨 위 앱 설치 띠: 아이콘, 이름, 흰 단추. 글씨 크기 설정과 상관없이 같은 크기(px) */
+.appbar { margin: -18px calc(-1 * max(16px, env(safe-area-inset-right, 0px))) 6px calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding: 14px max(16px, env(safe-area-inset-right, 0px)) 14px max(16px, env(safe-area-inset-left, 0px));
+  background: linear-gradient(112deg, #6E1A26 0%, #8A1F2E 45%, #B0503F 100%); color: #FFF8EC;
+  font-family: var(--body); font-size: 15px; line-height: 1.35; box-shadow: 0 2px 10px rgba(60,20,20,.18); }
+.appbar[hidden] { display: none !important; }
+.ab-row { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.ab-ic { width: 48px; height: 48px; border-radius: 12px; flex: none; background: #FFFCF6; box-shadow: 0 2px 6px rgba(0,0,0,.22); }
+.ab-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ab-tx b { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+.ab-tx span { font-size: 13.5px; opacity: .92; }
+.ab-go, .ab-x { flex: none; border: 0; border-radius: 999px; font: inherit; font-weight: 700; cursor: pointer; min-height: 44px; white-space: nowrap; }
+.ab-go { background: #FFFFFF; color: #7A1F2B; font-size: 15px; padding: 0 16px; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+.ab-x { background: rgba(255,255,255,.2); color: #FFF8EC; font-size: 14px; padding: 0 13px; }
+.ab-go:active, .ab-x:active { transform: scale(.96); }
+.ab-help { max-width: 560px; margin: 10px auto 0; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.14); font-size: 15px; line-height: 1.55; }
+.ab-help[hidden] { display: none; }
+@media (max-width: 350px) { .ab-ic { width: 40px; height: 40px; } .ab-tx span { display: none; } }
+@media (prefers-reduced-motion: no-preference) { .appbar { animation: abIn .35s ease-out; } @keyframes abIn { from { opacity: 0; transform: translateY(-12px); } } }
+
+/* ===== v51(11/14) 음악 앱처럼 아래에 늘 붙어 있는 작은 재생창 =====
+   듣는 동안(멈춰 둬도) 어느 화면에 가도 아래에 남음. 누르면 크게: 위치 막대, 15초, 이전/다음 말씀, 목소리, 빠르기.
+   작은 창 글씨는 글씨 크기 설정과 상관없이 px로 고정(높이가 늘 같게) */
+body.has-bar { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+body.has-bar .toast { bottom: calc(132px + env(safe-area-inset-bottom, 0px)); }
+.nowbar { z-index: 12; border-radius: 18px 18px 0 0; overflow: hidden; }
+.nb-line { height: 4px; background: var(--line); }
+.nb-line span { display: block; height: 100%; width: 0; background: var(--btn); }
+.nowbar.open .nb-line { display: none; }
+.nb-in { padding: 10px max(14px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px)); gap: 10px; }
+.nb-full { display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px); overflow-y: auto; padding: 4px 0 12px; border-bottom: 1px solid var(--line); }
+.nb-full[hidden] { display: none; }
+.nb-top { justify-content: space-between; }
+.nb-fold { border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 12px; min-height: 44px; padding: 0 14px; cursor: pointer; font: inherit; font-size: .85em; }
+.nb-x { color: var(--ink); }
+.nb-full .nb-btns { grid-template-columns: 1fr 1fr; }
+.nb-full .nb-btns button { color: var(--ink); font-family: inherit; }
+.nb-full .nb-btns[hidden] { display: none; }
+.nb-full .pick { box-shadow: none; }
+.nb-mini { display: flex; align-items: center; gap: 10px; font-size: 16px; }
+.nb-open { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 0; border: 0; background: none; color: var(--ink); text-align: left; cursor: pointer; font-family: inherit; font-size: 16px; }
+.nb-open img { width: 48px; height: 48px; flex: none; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+.nb-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.nb-tx .nb-t { flex: none; font-size: 16px; line-height: 1.35; }
+.nb-tx small { font-size: 13.5px; line-height: 1.3; color: var(--muted); }
+.nb-mini .nb-pp { flex: none; min-width: 100px; min-height: 56px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--btn); color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700; white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.nb-mini .nb-pp:active, .nb-open:active { transform: scale(.97); }
+.nb-dim { position: fixed; inset: 0; z-index: 11; background: rgba(20,12,8,.38); }
+.nb-dim[hidden] { display: none; }
+@media (max-width: 350px) { .nb-open img { display: none; } .nb-mini .nb-pp { min-width: 84px; padding: 0 12px; } }
+</style>
+
+<!-- v50: 맨 위 앱 설치 띠(설치 안 한 폰에만) -->
+<div class="appbar" id="appbar" hidden role="region" aria-label="앱 설치">
+  <div class="ab-row">
+    <img class="ab-ic" src="icon-192.png" alt="" width="48" height="48">
+    <div class="ab-tx"><b>오늘의 말씀</b><span id="ab-sub">바탕화면에서 바로 열기</span></div>
+    <button type="button" class="ab-go" id="ab-go">앱 설치</button>
+    <button type="button" class="ab-x" id="ab-x">닫기</button>
+  </div>
+  <p class="ab-help" id="ab-help" hidden></p>
+</div>
+
+<div class="app">
+  <header class="mast">
+    <svg class="cross" viewBox="0 0 34 46" aria-hidden="true"><path fill="currentColor" d="M14 0h6v12h12v6H20v28h-6V18H2v-6h12z"/></svg>
+    <h1>오늘의 말씀</h1>
+    <p class="sub">교황님 말씀을 쉽게 읽고 듣기</p>
+    <div class="orn" aria-hidden="true"><svg viewBox="0 0 14 14"><path fill="currentColor" d="M6 0h2v6h6v2H8v6H6V8H0V6h6z"/></svg></div>
+    <div class="today">
+      <span class="date" id="hdate"></span>
+      <span class="lit"><span class="chip" aria-hidden="true"></span><span id="hlit"></span></span>
+    </div>
+    <script>
+    (function () {
+      var k = new Date(Date.now() + (new Date().getTimezoneOffset() + 540) * 60000);
+      var m = k.getMonth() + 1, w = "일월화수목금토"[k.getDay()];
+      var s = { 3: "성 요셉 성월", 5: "성모 성월", 6: "예수 성심 성월", 9: "순교자 성월", 10: "묵주 기도 성월", 11: "위령 성월" }[m];
+      document.getElementById("hdate").textContent = k.getFullYear() + "년 " + m + "월 " + k.getDate() + "일 " + w + "요일";
+      document.getElementById("hlit").textContent = (k.getDay() === 0 ? "주일" : w + "요일") + (s ? ", " + s : "");
+    })();
+    </script>
+  </header>
+
+  <!-- v48(11/12): 설정은 맨 아래로(필요한 사람만 바꾸게). 첫 화면 위에는 찾아가는 한 줄만 -->
+  <button type="button" class="to-set" id="to-set">글씨 크기, 화면 밝기 바꾸기 &darr;</button>
+
+  <main id="view"></main>
+
+  <section class="settings" id="settings" aria-label="글씨와 화면 설정">
+  <h3 class="section-title">글씨와 화면</h3>
+  <div class="controls">
+  <div class="textsize" role="group" aria-label="글씨 크기">
+    <span>글씨</span>
+    <button type="button" id="fs-0" data-size="" aria-pressed="false">보통</button>
+    <button type="button" id="fs-1" data-size="big" aria-pressed="true">크게</button>
+    <button type="button" id="fs-2" data-size="bigger" aria-pressed="false">아주 크게</button>
+  </div>
+
+  <div class="textsize" data-k="theme" role="group" aria-label="화면 밝기">
+    <span>화면</span>
+    <button type="button" data-theme-v="light" aria-pressed="true">☀ 밝게</button>
+    <button type="button" data-theme-v="dark" aria-pressed="false">☾ 어둡게</button>
+  </div>
+  </div>
+  </section>
+
+  <!-- v50: 아래 설치 안내는 맨 위 앱 설치 띠로 옮김 -->
+
+  <div class="toast" id="toast" hidden role="status"></div>
+
+  <button type="button" class="bubble" id="bubble" hidden aria-label="오늘 말씀 차례로 듣기">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>
+    <span>말씀 듣기</span>
+  </button>
+
+  <!-- v51: 음악 앱처럼 아래에 늘 붙는 작은 재생창. 누르면 위로 크게 펼침 -->
+  <div class="nb-dim" id="nb-dim" hidden></div>
+  <div class="nowbar" id="nb-bar" hidden role="region" aria-label="재생창">
+    <div class="nb-line" aria-hidden="true"><span id="nb-fill"></span></div>
+    <div class="nb-in">
+      <div class="nb-full" id="nb-full" hidden>
+        <div class="nb-top"><button type="button" class="nb-fold" id="nb-fold">▼ 작게 보기</button><button type="button" class="nb-x" id="nb-x" aria-label="듣기 끄기">끄기</button></div>
+        <input type="range" id="nb-seek" min="0" max="100" step="0.1" value="0" aria-label="재생 위치">
+        <div class="nb-time"><span id="nb-cur">0:00</span><span id="nb-dur">0:00</span></div>
+        <div class="nb-btns">
+          <button type="button" id="nb-back">15초<br>뒤로</button>
+          <button type="button" id="nb-fwd">15초<br>앞으로</button>
+        </div>
+        <div class="nb-btns" id="nb-skip" hidden>
+          <button type="button" id="nb-prev">&larr; 이전 말씀</button>
+          <button type="button" id="nb-next">다음 말씀 &rarr;</button>
+        </div>
+        <div id="nb-pick"></div>
+      </div>
+      <div class="nb-mini">
+        <button type="button" class="nb-open" id="nb-open" aria-expanded="false" aria-controls="nb-full">
+          <img src="icon-192.png" alt="" width="48" height="48">
+          <span class="nb-tx"><b class="nb-t" id="nb-t"></b><small id="nb-hint">목소리, 빠르기 바꾸기 ▲</small></span>
+        </button>
+        <button type="button" id="nb-pp" class="nb-pp">❚❚ 멈춤</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="proto">
+    <p class="dedi">로사 할머니와<br>성당 교우분들께 드립니다</p>
+    <p><b>가톨릭 교회나 교구, 바티칸 뉴스의 공식 앱이 아닙니다.</b> 개인이 만들어 무료로 나누는 앱입니다.</p>
+    <p>우리나라 천주교 신자분들과 그 가족들이 교황님 말씀을 날마다 쉽게 읽고 들으실 수 있도록 만들었습니다. 말씀은 매일 새벽 바티칸 뉴스 한국어판에서 가져와 쉬운 말로 풀어 쓰고 녹음해 둡니다.</p>
+    <p>원문과 표현이 조금 다를 수 있어요. 정확한 말씀은 "기사 보기"에서 확인해 주세요.</p>
+    <button class="share share-app" type="button" id="share-app">이 앱을 다른 분께 알려 드리기</button>
+    <p class="meta"><br>방문 통계에 Google Analytics를 씁니다.<br><span id="updated"></span></p>
+  </footer>
+</div>
+
+<script>
+window.dataLayer = window.dataLayer || []; window.__ga = [];
+function gtag(){ dataLayer.push(arguments); window.__ga.push([].slice.call(arguments)); }
+if (location.hostname === 'malsseum.github.io') {
+  gtag('js', new Date());
+  gtag('config', 'G-WCJWBMV4YF', { allow_google_signals: false, allow_ad_personalization_signals: false });
+  var gs = document.createElement('script'); gs.async = true; gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-WCJWBMV4YF'; document.head.appendChild(gs);
+}
+</script>
+<script>
+let SPEAKERS = {}, DIOCESE_SPEAKER = {}, MESSAGES = [], RADIO_OPEN = [], RADIO_CLOSE = [], DATA_VER = "";
+/* 11/11: 교구 홈페이지에서 말씀을 가져올 수 없는 교구 */
+const DIO_NONE = {
+  "청주": "청주교구는 지금 교구장 주교님 자리가 비어 있어 말씀을 싣지 못합니다.",
+  "부산": "부산교구 홈페이지에는 주교님 말씀을 따로 모아 두는 곳이 없어 아직 가져오지 못합니다.",
+  "수원": "수원교구 홈페이지에는 주교님 말씀을 따로 모아 두는 곳이 없어 아직 가져오지 못합니다.",
+  "춘천": "춘천교구 홈페이지에는 주교님 말씀이 그림이나 첨부 파일로만 올라와 아직 가져오지 못합니다.",
+  "제주": "제주교구 홈페이지에는 주교님 말씀이 영상으로만 올라와 아직 가져오지 못합니다."
+};
+const DIOCESES = ["서울", "수원", "인천", "의정부", "춘천", "원주", "대전", "청주", "대구", "안동", "부산", "마산", "광주", "전주", "제주", "군종"];
+
+const view = document.getElementById("view");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+/* 글씨 크기 */
+const root = document.documentElement;
+function setSize(sz) {
+  root.classList.remove("big", "bigger");
+  if (sz) root.classList.add(sz);
+  document.querySelectorAll(".textsize:not([data-k]) button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.size === sz)));
+  store.set("fs", sz);
+}
+document.querySelectorAll(".textsize:not([data-k]) button").forEach(b => b.addEventListener("click", () => setSize(b.dataset.size)));
+setSize(store.get("fs", "big"));
+
+/* 화면 밝기: 기본은 밝게(폰이 어두운 모드여도), 고른 값은 기억 */
+function setTheme(t) {
+  root.setAttribute("data-theme", t);
+  document.querySelectorAll('.textsize[data-k="theme"] button').forEach(b => b.setAttribute("aria-pressed", String(b.dataset.themeV === t)));
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute("content", t === "dark" ? "#17110F" : "#7A1F2B");
+  store.set("theme", t);
+}
+document.querySelectorAll('.textsize[data-k="theme"] button').forEach(b => b.addEventListener("click", () => setTheme(b.dataset.themeV)));
+setTheme(store.get("theme", "light"));
+/* v48: 위의 한 줄을 누르면 맨 아래 설정으로 */
+document.getElementById("to-set").addEventListener("click", () => {
+  try { gtag("event", "to_settings"); } catch (e) {}
+  document.getElementById("settings").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+/* 상태 */
+const POPE_ONLY = true;   /* 11/11 v37: 추기경님, 주교님 말씀은 뺌(새 글이 드묾). 다시 넣으려면 false로, 자동 갱신 스크립트 CHURCH_ON도 true로 */ let tab = POPE_ONLY ? "all" : store.get("tab", "all");
+let diocese = store.get("diocese", "");
+let pickingDiocese = false;
+
+/* 소리로 읽기 */
+const canSpeak = "speechSynthesis" in window;
+
+/* 미리 녹음한 제미나이 음성: audio/<목소리>/<조각>.mp3 */
+const VOICES = [
+  { id: "CharonG",      label: "차분한<br>남자", rate: 1.2 },
+  { id: "Gacrux",       label: "차분한<br>여자" }
+];
+/* 11/8: 예전 "천천히"(0.85)를 새 "보통"으로 */
+const SPEEDS = [["0.75", "천천히"], ["0.85", "보통"], ["1", "조금<br>빠르게"]];
+let voice = store.get("voice3", "CharonG");
+if (!VOICES.some(v => v.id === voice)) voice = "CharonG";
+let speed = store.get("speed3", "0.85");
+if (!SPEEDS.some(s => s[0] === speed)) speed = "0.85";
+/* 제미나이 녹음은 원래 조금 느려서 목소리별 배속을 곱한다 */
+function rateNow() { const v = VOICES.find(x => x.id === voice); return +speed * ((v && v.rate) || 1); }
+const player = new Audio();
+player.preload = "auto";
+let playerToken = 0;
+function clipTitle(name) {
+  if (name === "open") return "여는 인사";
+  if (name === "close") return "맺는 인사";
+  const m = MESSAGES.find(x => x.id === name);
+  return m ? whoShort(m) + (isDam(m) ? " 담화" : " 말씀") : "";
+}
+/* v42: 교황님 말씀만 쓰는 앱이라 "레오 14세"는 빼고 "교황님"만 */
+function whoShort(m) { return POPE_ONLY ? "교황님" : SPEAKERS[m.speaker].label.replace(/ \(.*\)$/, ""); }
+const WHO_GONE = POPE_ONLY ? " gone" : "";
+let curClip = "";
+/* 11/11 v31: 녹음을 통째로 미리 받아 폰 안(blob)에서 재생. 잠금 화면에서 갤럭시가 인터넷을 막으면
+   받다 만 녹음이 중간에 소리 없이 멈추던 문제(화면은 "재생 중"). */
+function clipURL(name) { return ("audio/" + voice + "/" + name).toLowerCase() + ".mp3?v=" + DATA_VER; }
+const clipBlobs = {};
+function loadClip(name) {
+  const key = voice + "/" + name;
+  if (clipBlobs[key]) return clipBlobs[key];
+  const c = clipBlobs[key] = { url: "", done: false };
+  fetch(clipURL(name)).then(r => { if (!r.ok) throw 0; return r.blob(); })
+    .then(b => { c.url = URL.createObjectURL(b); c.done = true; })
+    .catch(() => { c.done = true; delete clipBlobs[key]; });
+  return c;
+}
+function playClip(name, onend, onfail, wait) {
+  const c = clipBlobs[voice + "/" + name];
+  /* 라디오가 이어서 넘어가는 중이면 받는 동안 소리 없는 쉼으로 최대 8초 기다림(쉼이 끊기면 폰이 페이지를 재움) */
+  if (radioOn && c && !c.done && (wait || 0) < 20) { playGap(400, () => playClip(name, onend, onfail, (wait || 0) + 1)); return; }
+  const t = ++playerToken;
+  curClip = name;
+  if (name !== "open" && name !== "close") { const mm = MESSAGES.find(x => x.id === name); try { gtag("event", "msg_play", { msg: name, speaker: mm ? mm.speaker : "", radio: radioOn ? 1 : 0, voice: voice }); } catch (e) {} }
+  nb.t.textContent = barTitle(name);
+  setMedia(name);
+  player.loop = false;
+  player.src = (c && c.url) || clipURL(name);
+  player.defaultPlaybackRate = player.playbackRate = rateNow();
+  try { player.preservesPitch = true; } catch (e) {}
+  player.onended = () => { if (t === playerToken) { gaComplete(name); onend(); } };   // v45: 끝까지 들음
+  player.onerror = () => { if (t === playerToken) onfail(); };
+  const p = player.play();
+  if (p && p.catch) p.catch(err => { if (t === playerToken && err && err.name !== "AbortError") onfail(); });
+}
+/* v45 북극성 지표: 말씀 하나를 끝까지 들으면 msg_complete(넘기거나 건너뛴 것은 안 셈) */
+function gaComplete(name) {
+  if (!name || name === "open" || name === "close" || name.charAt(0) === "#") return;
+  const mm = MESSAGES.find(x => x.id === name);
+  try { gtag("event", "msg_complete", { msg: name, speaker: mm ? mm.speaker : "", radio: radioOn ? 1 : 0, voice: voice }); } catch (e) {}
+}
+function stopClip() { playerToken++; try { player.pause(); } catch (e) {} showBar(false); if (MS) { MS.metadata = null; MS.playbackState = "none"; } }
+/* 말씀 사이 쉼은 소리 없는 녹음으로 채움. 소리가 한 번이라도 끊기면 화면이 꺼진 폰에서 크롬이 페이지를 재워 다음 말씀이 안 나옴 */
+let silentURL = "";
+function silentWav() {
+  if (silentURL) return silentURL;
+  const rate = 8000, n = rate * 3, b = new ArrayBuffer(44 + n * 2), v = new DataView(b);
+  const w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  w(0, "RIFF"); v.setUint32(4, 36 + n * 2, true); w(8, "WAVE"); w(12, "fmt ");
+  v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+  w(36, "data"); v.setUint32(40, n * 2, true);
+  silentURL = URL.createObjectURL(new Blob([b], { type: "audio/wav" }));
+  return silentURL;
+}
+function playGap(ms, onend) {
+  const t = ++playerToken;
+  curClip = "";
+  let done = false;
+  const fin = () => { player.removeEventListener("timeupdate", tick); if (done || t !== playerToken) return; done = true; onend(); };
+  const tick = () => { if (player.currentTime * 1000 >= ms) fin(); };
+  const fallback = () => { if (t === playerToken) setTimeout(fin, ms); };
+  player.loop = false;
+  player.src = silentWav();
+  player.defaultPlaybackRate = player.playbackRate = 1;
+  player.addEventListener("timeupdate", tick);
+  player.onended = fin;
+  player.onerror = fallback;
+  const p = player.play();
+  if (p && p.catch) p.catch(err => { if (err && err.name !== "AbortError") fallback(); });
+}
+/* 다음 말씀 녹음을 미리 받아 둠 */
+function prefetchClip(name) {
+  try { loadClip(name); } catch (e) {}
+}
+
+/* 잠금 화면, 알림창 재생 조절: 제목, 멈춤/계속, 15초, 라디오면 이전/다음 말씀 */
+const MS = "mediaSession" in navigator ? navigator.mediaSession : null;
+function setMedia(name) {
+  if (!MS || typeof MediaMetadata === "undefined") return;
+  const m = MESSAGES.find(x => x.id === name);
+  MS.metadata = new MediaMetadata({
+    title: m ? m.title : clipTitle(name),
+    artist: m ? clipTitle(name) : "오늘의 말씀",
+    album: "오늘의 말씀",
+    artwork: [{ src: "icon-512.png", sizes: "512x512", type: "image/png" }, { src: "icon-192.png", sizes: "192x192", type: "image/png" }]
+  });
+  const set = (a, f) => { try { MS.setActionHandler(a, f); } catch (e) {} };
+  set("nexttrack", radioOn ? () => radioJump(1) : null);
+  set("previoustrack", radioOn ? () => radioJump(-1) : null);
+}
+function radioJump(d) {
+  const q = radioQueue();
+  radioIdx = Math.max(0, Math.min(q.length - 1, radioIdx + d));
+  radioPlay(false);
+}
+if (MS) {
+  const set = (a, f) => { try { MS.setActionHandler(a, f); } catch (e) {} };
+  set("play", () => { userPause = false; player.play(); });
+  set("pause", () => { userPause = true; player.pause(); });
+  set("seekbackward", () => { player.currentTime = Math.max(0, player.currentTime - 15); });
+  set("seekforward", () => { if (player.duration) player.currentTime = Math.min(player.duration - 0.5, player.currentTime + 15); });
+  set("stop", () => { radioStop(); stopSpeak(); route(); });
+  player.addEventListener("play", () => { MS.playbackState = "playing"; });
+  player.addEventListener("pause", () => { MS.playbackState = "paused"; });
+}
+
+/* v41 잠금 화면 끊김 대비: 말씀 듣기 중 화면을 다시 켰는데, 직접 멈추지 않았는데도 소리가 멈춰 있으면 이어서 틂.
+ * 처음 한 번은 라디오 화면에 배터리 설정 안내를 보여 줌(폰이 화면 꺼진 동안 소리를 끊는 경우) */
+let userPause = false, wasPlayingHidden = false, showBatteryTip = false;
+player.addEventListener("play", () => { userPause = false; });
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) { wasPlayingHidden = radioOn && !player.paused; return; }
+  if (!radioOn || !wasPlayingHidden || userPause || !player.paused || player.ended) return;
+  player.play().catch(() => {});
+  try { gtag("event", "radio_resume"); } catch (e) {}
+  let seen = false;
+  try { seen = localStorage.getItem("batteryTip") === "1"; localStorage.setItem("batteryTip", "1"); } catch (e) {}
+  if (!seen) { showBatteryTip = true; renderRadio(); }
+});
+
+/* 아래쪽 재생창: 제목, 위치 막대, 시간, 15초 뒤로/앞으로, 멈춤/계속, 끄기 */
+const nb = {};
+["bar", "t", "seek", "cur", "dur", "pp", "back", "fwd", "x", "fill", "full", "open", "fold", "dim", "skip", "prev", "next", "pick", "hint"].forEach(k => nb[k] = document.getElementById("nb-" + k));
+const fmt = s => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+let nbHide = 0;
+let holdBar = false;   // v51: 듣던 것을 바로 다른 것으로 바꿀 때는 재생창을 내리지 않음(깜빡임, 펼친 창 닫힘 막기)
+function showBar(on) {
+  if (!on && holdBar) return;
+  clearTimeout(nbHide);
+  if (!on) setFull(false);
+  nb.bar.hidden = !on;
+  document.body.classList.toggle("has-bar", on);
+  syncBubble();
+}
+/* v51 재생창 크게 보기: 위치 막대, 15초, 이전/다음 말씀(말씀 듣기 중), 목소리, 빠르기 */
+function setFull(open) {
+  if (nb.full.hidden === !open) return;
+  nb.full.hidden = !open; nb.dim.hidden = !open;
+  nb.bar.classList.toggle("open", open);
+  nb.open.setAttribute("aria-expanded", String(open));
+  nb.hint.innerHTML = open ? "눌러서 작게 보기 ▼" : "목소리, 빠르기 바꾸기 ▲";
+  if (open) {
+    nb.pick.innerHTML = pickHTML("nb-");
+    bindPick(barVoice, nb.pick);
+    nb.skip.hidden = !radioOn;
+    try { gtag("event", "bar_open"); } catch (e) {}
+  } else nb.pick.innerHTML = "";
+}
+/* 목소리를 바꾸면 듣던 것을 새 목소리로 다시(말씀 듣기는 지금 말씀 처음부터, 말씀 하나는 처음부터) */
+function barVoice() {
+  if (radioOn) radioPlay(false);
+  else if (detailOn && detailMsg) { const m = MESSAGES.find(x => x.id === detailMsg); if (m) playDetail(m); }
+}
+function barTitle(name) { const m = MESSAGES.find(x => x.id === name); return m ? m.title : clipTitle(name); }
+nb.open.addEventListener("click", () => setFull(nb.full.hidden));
+nb.fold.addEventListener("click", () => setFull(false));
+nb.dim.addEventListener("click", () => setFull(false));
+nb.prev.addEventListener("click", () => { if (radioOn) radioJump(-1); });
+nb.next.addEventListener("click", () => { if (radioOn) radioJump(1); });
+/* 라디오 버블: 라디오 화면이 아니고 재생창이 없을 때만 오른쪽 아래에 떠 있음. 누르면 바로 라디오 시작 */
+function syncBubble() {
+  const b = document.getElementById("bubble");
+  const on = !!MESSAGES.length && location.hash !== "#radio" && nb.bar.hidden;
+  b.hidden = !on;
+  document.body.classList.toggle("has-bub", on);
+}
+document.getElementById("bubble").addEventListener("click", () => {
+  history.pushState(null, "", "#radio");
+  route();
+  radioPlay(radioIdx === 0);
+});
+function syncBar() {
+  if (progPrep) {
+    nb.cur.textContent = "0:00"; nb.dur.textContent = "0:00";
+    nb.seek.value = 0; nb.fill.style.width = "0%"; nb.skip.hidden = !radioOn;
+    if (!nb.pp.querySelector(".spin")) nb.pp.innerHTML = '<span class="spin" aria-hidden="true"></span>멈춤';
+    return;
+  }
+  const d = isFinite(player.duration) ? player.duration : 0;
+  nb.cur.textContent = fmt(player.currentTime);
+  nb.dur.textContent = fmt(d);
+  if (!nb.seeking) nb.seek.value = d ? (player.currentTime / d * 100).toFixed(1) : 0;
+  nb.fill.style.width = (d ? Math.min(100, player.currentTime / d * 100) : 0) + "%";
+  nb.skip.hidden = !radioOn;
+  nb.pp.textContent = player.paused ? "▶ 계속" : "❚❚ 멈춤";
+  nb.pp.setAttribute("aria-label", player.paused ? "계속 듣기" : "잠깐 멈춤");
+}
+/* v43: 말씀 준비 중(소리 없는 쉼을 되풀이로 트는 동안)엔 재생창을 띄우되 막대는 0초에 멈춰 둠(syncBar) */
+player.addEventListener("play", () => { showBar(true); syncBar(); });
+player.addEventListener("pause", syncBar);
+player.addEventListener("timeupdate", syncBar);
+player.addEventListener("loadedmetadata", syncBar);
+player.addEventListener("ended", () => { nbHide = setTimeout(() => { if (player.ended || player.paused) showBar(false); }, 2500); });
+nb.seek.addEventListener("input", () => { if (progPrep) { nb.seek.value = 0; return; } nb.seeking = true; const d = player.duration; if (d) nb.cur.textContent = fmt(nb.seek.value / 100 * d); });
+nb.seek.addEventListener("change", () => { if (progPrep) { nb.seek.value = 0; return; } nb.seeking = false; const d = player.duration; if (d) player.currentTime = nb.seek.value / 100 * d; });
+nb.pp.addEventListener("click", () => { if (progPrep) { radioStop(); progPrep = false; player.pause(); showBar(false); renderRadio(); return; } userPause = !player.paused; player.paused ? player.play() : player.pause(); });
+nb.back.addEventListener("click", () => { if (progPrep) return; player.currentTime = Math.max(0, player.currentTime - 15); });
+nb.fwd.addEventListener("click", () => { if (progPrep) return; if (player.duration) player.currentTime = Math.min(player.duration - 0.5, player.currentTime + 15); });
+nb.x.addEventListener("click", () => { radioStop(); stopSpeak(); route(); });
+function pickHTML(pre) {
+  pre = pre || "";
+  return `<div class="pick">
+    <span class="k">목소리</span>
+    <div class="pick-row">${VOICES.map(v => `<button type="button" id="${pre}v-${v.id}" data-voice="${v.id}" aria-pressed="${v.id === voice}">${v.label}</button>`).join("")}</div>
+    <span class="k">빠르기</span>
+    <div class="pick-row three">${SPEEDS.map(([k, l]) => `<button type="button" id="${pre}sp-${k.replace(".", "")}" data-speed="${k}" aria-pressed="${k === speed}">${l}</button>`).join("")}</div>
+  </div>`;
+}
+/* onVoice: 목소리를 바꿨을 때 할 일(듣는 중이면 처음부터 새 목소리로) */
+function bindPick(onVoice, root) {
+  root = root || view;
+  root.querySelectorAll("[data-voice]").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.voice === voice) return;
+    voice = b.dataset.voice; store.set("voice3", voice);
+    document.querySelectorAll("[data-voice]").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.voice === voice)));
+    try { gtag("event", "voice_pick", { voice: voice, where: root === view ? "page" : "bar" }); } catch (e) {}
+    onVoice();
+  }));
+  root.querySelectorAll("[data-speed]").forEach(b => b.addEventListener("click", () => {
+    speed = b.dataset.speed; store.set("speed3", speed);
+    if (curClip) player.defaultPlaybackRate = player.playbackRate = rateNow();   // 말씀 사이 쉼(소리 없음)은 1배 그대로
+    document.querySelectorAll("[data-speed]").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.speed === speed)));
+  }));
+}
+
+let detailOn = false, detailMsg = "";
+function stopSpeak() { detailOn = false; detailMsg = ""; stopClip(); if (canSpeak) speechSynthesis.cancel(); syncListen(); }
+/* 지금 보이는 말씀 화면의 듣기 단추를 재생 상태에 맞춤 */
+function syncListen() { const b = document.getElementById("listen"); if (b) setListen(b, detailOn && b.dataset.id === detailMsg); }
+const ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+const ICON_STOP = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>';
+function setListen(btn, on) {
+  btn.innerHTML = on ? ICON_STOP + "<span>그만 듣기</span>" : ICON_PLAY + "<span>소리로 들려주세요</span>";
+}
+/* 상세 화면 듣기: 미리 녹음한 음성을 틀고, 없으면 기기 음성으로 읽음 */
+function speak(m, btn) {
+  if ((detailOn && detailMsg === m.id) || (canSpeak && speechSynthesis.speaking)) { stopSpeak(); setListen(btn, false); return; }
+  playDetail(m);
+}
+/* v51: 말씀 듣기(라디오)가 나오는 중이면 그것을 끄고 이 말씀을 틂 */
+function playDetail(m) {
+  holdBar = !nb.bar.hidden; radioStop(); stopSpeak(); holdBar = false;
+  detailOn = true; detailMsg = m.id; syncListen();
+  playClip(m.id, () => { detailOn = false; detailMsg = ""; syncListen(); },
+    () => { detailOn = false; detailMsg = ""; const b = document.getElementById("listen"); if (b && b.dataset.id === m.id) speakTTS(m, b); else syncListen(); });
+}
+function speakTTS(m, btn) {
+  if (!canSpeak) { setListen(btn, false); return; }
+  const sp = whoShort(m);
+  const text = [sp + " 말씀입니다", m.kind, m.date, m.title, m.about, m.quote]
+    .concat(m.points).concat(["오늘 해 볼 일. " + m.todo]).join(". ");
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ko-KR"; u.rate = 0.85;
+  const ko = speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith("ko"));
+  if (ko) u.voice = ko;
+  u.onend = u.onerror = () => setListen(btn, false);
+  try { speechSynthesis.speak(u); setListen(btn, true); } catch (e) { setListen(btn, false); }
+}
+
+/* 목록 고르기 */
+/* 목록은 말씀하신 날이 늦은 것부터(올라온 순서 말고). 날을 못 읽으면 원래 자리 */
+function dayKey(m) {
+  const r = /(\d{1,2})월\s*(\d{1,2})일/.exec(m.date || "");
+  if (!r) return null;
+  const y = parseInt(m.year, 10) || new Date().getFullYear();
+  return y * 10000 + parseInt(r[1], 10) * 100 + parseInt(r[2], 10);
+}
+function byDay(list) {
+  return list.map((m, i) => ({ m, i, k: dayKey(m) }))
+    .sort((a, b) => (a.k !== null && b.k !== null && a.k !== b.k) ? b.k - a.k : a.i - b.i)
+    .map(x => x.m);
+}
+function visible() {
+  if (tab === "pope") return byDay(MESSAGES.filter(m => m.group === "pope" && !isDam(m)));
+  if (tab === "cardinal") return byDay(MESSAGES.filter(m => m.group === "cardinal"));
+  if (tab === "bishop") return byDay(MESSAGES.filter(m => m.group === "bishop" && m.diocese === diocese));
+  return byDay(MESSAGES.filter(m => !isDam(m) && fresh(m) && (m.group !== "bishop" || m.diocese === diocese)));
+}
+/* 추기경님, 주교님 말씀은 30일이 지나면 "모두"와 라디오에서 빼고 각자 칸에만 남김(교황님 말씀은 매일 새로 바뀜) */
+function msgAge(m) {
+  const a = String(m.date || "").match(/(\d+)월\s*(\d+)일/);
+  if (!a || !m.year) return 0;
+  const iso = m.year + "-" + String(a[1]).padStart(2, "0") + "-" + String(a[2]).padStart(2, "0");
+  return -(daysTo(iso) || 0);
+}
+const fresh = m => m.group === "pope" || msgAge(m) <= 30;
+/* 담화(주교회의 교황 문헌)는 매일 말씀과 따로 보여 줌 */
+const isDam = m => m.series === "damhwa";
+function todayISO() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function daysTo(iso) { const a = (iso || "").match(/^(\d{4})-(\d\d)-(\d\d)$/); if (!a) return null; const t = todayISO().split("-"); return Math.round((new Date(+a[1], +a[2] - 1, +a[3]) - new Date(+t[0], +t[1] - 1, +t[2])) / 86400000); }
+/* "11월 22일 세계 젊은이의 날을 위한 담화" */
+function damFor(m) {
+  const k = m.kind || "담화";
+  if (m.forDay) {
+    const day = m.forDay.replace(/^\d{4}년\s*/, ""), c = day.charCodeAt(day.length - 1);
+    // "2026년 9월 1일"처럼 날짜만 있으면 "9월 1일 제11차 피조물 보호를 위한 기도의 날 담화"
+    if (/^\d+월\s*\d+일$/.test(day) && m.occasion) return day + " " + m.occasion.replace(/^\d{4}년\s*/, "");
+    const josa = c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 === 0 ? "를" : "을";
+    return day + josa + " 위한 " + k;
+  }
+  return m.occasion || k;
+}
+function damList() {
+  const d = MESSAGES.filter(isDam);
+  return d.filter(m => daysTo(m.forDate) === 0).concat(d.filter(m => daysTo(m.forDate) !== 0));
+}
+function damItemHTML(m) {
+  const today = daysTo(m.forDate) === 0;
+  const name = (m.forDay || "").replace(/^\d{4}년\s*\d+월\s*\d+일\s*/, "") || (m.occasion || "").replace(/^\d{4}년\s*/, "").replace(/\s*(담화|메시지)$/, "");
+  const top = today ? `오늘은 ${name}, 교황님 ${m.kind || "담화"}` : damFor(m);
+  const left = daysTo(m.forDate);
+  const when = left > 0 && left <= 30 ? ` (${left}일 남음)` : "";
+  return `<button class="item dam${today ? " dam-today" : ""}" type="button" data-open="${m.id}">
+    <span class="for">${esc(top + when)}</span>
+    <span class="t">${esc(m.title)}</span>
+    <span class="d">${m.forDay && m.occasion && !damFor(m).includes(m.occasion.replace(/^\d{4}년\s*/, "")) ? esc(m.occasion) + "<br>" : ""}${esc(m.year ? m.year + "년 " : "")}${esc(m.date)} 발표</span>
+  </button>`;
+}
+function itemHTML(m) {
+  const s = SPEAKERS[m.speaker];
+  return `<button class="item" type="button" data-open="${m.id}">
+    <span class="who ${s.cls}${WHO_GONE}">${esc(s.label)}</span>
+    <span class="t">${esc(m.title)}</span>
+    <span class="d"><b>${esc(fullDate(m))}</b><br>${esc(m.occasion || m.kind)}</span>
+  </button>`;
+}
+/* 교황님 사진(매일 자동 갱신 때 기사 대표 사진을 받아 둠) */
+function photoHTML(m, cls) {
+  if (!m || !m.photo) return "";
+  return `<figure class="photo ${cls || ""}">
+    <img src="${esc(m.photo)}?v=${esc(DATA_VER)}" alt="${esc(m.photoAlt || SPEAKERS[m.speaker].label)}" loading="lazy" onerror="this.closest('figure').remove()">
+    <figcaption>${esc(m.photoCredit || "")}</figcaption>
+  </figure>`;
+}
+function latestPhoto(group) { return byDay(MESSAGES.filter(m => m.group === group && m.photo))[0]; }   // v49: 날짜로 가장 최근 사진
+/* "레오 14세 교황님" → ["레오 14세", "교황"] */
+function nameRole(label) {
+  const a = label.replace(/ \(.*\)$/, "").match(/^(.*) (교황|추기경|대주교|주교)님$/);
+  return a ? [a[1], a[2]] : [label, ""];
+}
+/* 사진 날짜 "2026-11-07" → {md: "11월 7일", full: "2026년 11월 7일 (토)"} */
+function photoDay(s) {
+  const a = (s || "").match(/^(\d{4})-(\d\d)-(\d\d)$/);
+  if (!a) return null;
+  const d = new Date(+a[1], +a[2] - 1, +a[3]);
+  return { md: +a[2] + "월 " + +a[3] + "일", full: a[1] + "년 " + +a[2] + "월 " + +a[3] + "일 (" + "일월화수목금토"[d.getDay()] + ")" };
+}
+/* 홈 사진 카드: 언제, 어떤 자리에서 찍은 사진인지 */
+function photoCardHTML(m) {
+  if (!m) return "";
+  const [name, role] = nameRole(SPEAKERS[m.speaker].label);
+  const pd = photoDay(m.photoDate);
+  const place = esc((m.occasion || m.kind || "").replace(/\s*\(.*?\)/g, "").replace(/\s*강론$/, ""));
+  const md = esc((m.date || "").replace(/ .요일$/, ""));
+  let cap;
+  if (pd && pd.md === md) cap = `${pd.md}, ${place}에서`;
+  else if (pd) cap = `${pd.md}에 찍은 사진<small>${md} ${place} 기사에 실린 사진</small>`;
+  else cap = `${md} ${place} 기사에 실린 사진`;
+  return `
+      <button class="photo-card" type="button" data-open="${m.id}">
+        <span class="ph-head"><b>${esc(role === "교황" ? "교황님" : role + "님")} 사진</b><span>오늘도 함께 기도해요</span></span>
+        ${photoHTML(m, "arch")}
+        <span class="cap">${cap}</span>
+        ${POPE_ONLY ? "" : `<span class="nm"><b>${esc(name)}</b><span>${esc(role)}</span></span>`}
+        ${pd ? `<span class="pd">${esc(pd.full)}</span>` : ""}
+      </button>`;
+}
+/* "2026년 11월 7일 토요일" */
+function fullDate(m) { return (m.year ? m.year + "년 " : "") + m.date + (m.dateNote ? " (" + m.dateNote + ")" : ""); }
+const ICON_NEWS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h13v14a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2V4zm2 3v3h9V7H6zm0 5v2h9v-2H6zm0 4v2h6v-2H6zm13-8h2v10a2 2 0 0 1-2 2V8z"/></svg>';
+
+function home() {
+  const newest = byDay(MESSAGES.filter(m => !isDam(m) && fresh(m) && (m.group !== "bishop" || m.diocese === diocese)))[0]
+    || byDay(MESSAGES.filter(m => !isDam(m)))[0];   // v49: 첫 화면 "가장 최근 말씀"도 날짜로
+  const dams = (tab === "all" || tab === "pope") ? damList() : [];
+  const damPart = dams.length ? `
+      <div class="stack" style="gap:14px">
+        <h3 class="section-title">교황님 담화</h3>
+        <p class="dam-sub">특별한 날을 위해 쓰신 긴 글이에요. 최근 ${dams.length}편을 늘 여기 둡니다.</p>
+        <div class="list">${dams.map(damItemHTML).join("")}</div>
+      </div>` : "";
+  const tabs = [["all", "모두"], ["pope", "교황님"], ["cardinal", "추기경님"], ["bishop", diocese ? diocese + " 교구 주교님" : "우리 교구 주교님"]];
+
+  let listPart;
+  if (tab === "bishop" && (!diocese || pickingDiocese)) {
+    listPart = `
+      <div class="stack" style="gap:14px">
+        <h3 class="section-title">어느 교구에 다니세요?</h3>
+        <div class="dio-grid">
+          ${DIOCESES.map((d, i) => `<button type="button" id="dio-${i}" data-dio="${d}">${d}</button>`).join("")}
+        </div>
+      </div>`;
+  } else {
+    const items = visible();
+    const head = tab === "bishop"
+      ? `<div class="diocese-head"><h3 class="section-title">${esc(diocese)} 교구 말씀</h3><button class="linkbtn" type="button" id="change-dio">교구 바꾸기</button></div>`
+      : `<h3 class="section-title">말씀 목록</h3>`;
+    const body = items.length
+      ? `<div class="list">${items.map(itemHTML).join("")}</div>`
+      : `<div class="empty"><p>${esc(DIO_NONE[diocese] || diocese + " 교구 주교님의 새 말씀이 교구 홈페이지에 올라오면 여기에 넣어 드립니다. 보통 성탄과 부활 무렵에 올라옵니다.")}</p></div>`;
+    listPart = `<div class="stack" style="gap:14px">${head}${body}</div>`;
+  }
+
+  // 추기경님 탭에서는 추기경님 사진, 주교님 탭은 사진 없음, 나머지는 교황님 사진
+  const photoCard = tab === "bishop" ? "" : photoCardHTML(latestPhoto(tab === "cardinal" ? "cardinal" : "pope"));
+  view.innerHTML = `
+    <div class="stack">
+      ${photoCard}
+      <button class="big-btn" type="button" data-open="${newest.id}">
+        <span class="k">새 말씀이 왔어요, ${esc(newest.date)}</span>
+        <span class="t">${esc(newest.title)}</span>
+        <span class="go">${POPE_ONLY ? "" : esc(SPEAKERS[newest.speaker].label) + " "}말씀 읽기</span>
+      </button>
+      <button class="radio-entry" type="button" data-open="radio">
+        ${ICON_RADIO}
+        <span>말씀 듣기<small>말씀을 차례로 읽어 드려요. 화면을 안 봐도 됩니다.</small></span>
+      </button>
+      ${damPart}
+      ${POPE_ONLY ? "" : `<div class="who-tabs" role="group" aria-label="누구 말씀">
+        ${tabs.map(([k, l]) => `<button type="button" id="tab-${k}" data-tab="${k}" aria-pressed="${tab === k}">${esc(l)}</button>`).join("")}
+      </div>`}
+      ${listPart}
+    </div>`;
+
+  view.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click", () => { location.hash = b.dataset.open; }));
+  view.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click", () => {
+    tab = b.dataset.tab; store.set("tab", tab); pickingDiocese = false; home();
+  }));
+  view.querySelectorAll("[data-dio]").forEach(b => b.addEventListener("click", () => {
+    diocese = b.dataset.dio; store.set("diocese", diocese); pickingDiocese = false; home();
+  }));
+  const ch = document.getElementById("change-dio");
+  if (ch) ch.addEventListener("click", () => { pickingDiocese = true; home(); });
+}
+
+/* 카톡, 문자로 보내기: 폰의 보내기 창을 띄우고, 안 되면 글과 주소를 복사 */
+const ICON_SHARE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l3.9-2.6c.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>';
+function toast(t) {
+  const el = document.getElementById("toast");
+  el.textContent = t; el.hidden = false;
+  clearTimeout(toast.h); toast.h = setTimeout(() => { el.hidden = true; }, 4500);
+}
+async function shareMsg(m) {
+  try { gtag("event", "msg_share", { msg: m.id, method: navigator.share ? "share" : "copy" }); } catch (e) {}
+  const s = SPEAKERS[m.speaker];
+  const url = location.origin + location.pathname + "#" + m.id;
+  const text = `[오늘의 말씀] ${whoShort(m)} ${isDam(m) ? "담화" : "말씀"}\n${m.title}\n${fullDate(m)}\n\n"${m.quote}"\n\n쉬운 말로 읽고 듣기: ${url}`;
+  if (navigator.share) {
+    try { await navigator.share({ title: m.title, text }); return; }
+    catch (e) { if (e && e.name === "AbortError") return; }
+  }
+  try { await navigator.clipboard.writeText(text); toast("말씀과 주소를 복사했어요. 카톡 대화창을 길게 눌러 '붙여넣기' 하세요."); }
+  catch (e) { prompt("아래 글을 길게 눌러 복사해 보내세요.", text); }
+}
+
+async function shareApp() {
+  try { gtag("event", "app_share", { method: navigator.share ? "share" : "copy" }); } catch (e) {}
+  const url = location.origin + location.pathname;
+  const text = "[오늘의 말씀] 교황님 말씀을 쉬운 말로 읽고, 차례로 들을 수 있어요. 큰 글씨, 무료.\n" + url;
+  if (navigator.share) {
+    try { await navigator.share({ title: "오늘의 말씀", text }); return; }
+    catch (e) { if (e && e.name === "AbortError") return; }
+  }
+  try { await navigator.clipboard.writeText(text); toast("앱 주소를 복사했어요. 카톡 대화창을 길게 눌러 '붙여넣기' 하세요."); }
+  catch (e) { prompt("아래 글을 길게 눌러 복사해 보내세요.", text); }
+}
+
+function detail(m) {
+  const s = SPEAKERS[m.speaker];
+  view.innerHTML = `
+    <article class="stack" style="gap:24px">
+      <button class="back" type="button" id="back">&larr; 처음으로</button>
+      <div class="head">
+        <span class="who speaker ${s.cls}${WHO_GONE}">${esc(s.label)}</span>
+        <h2>${esc(m.title)}</h2>
+      </div>
+      ${photoHTML(m)}
+      <dl class="facts">
+        <div><dt>${isDam(m) ? "발표" : "언제"}</dt><dd><b>${esc(fullDate(m))}</b></dd></div>
+        ${m.forDay ? `<div><dt>어느 날</dt><dd><b>${esc(damFor(m))}</b></dd></div>` : ""}
+        <div><dt>어떤 자리</dt><dd>${esc(m.occasion || m.kind)}</dd></div>
+        ${m.where ? `<div><dt>어디서</dt><dd>${esc(m.where)}</dd></div>` : ""}
+        <div><dt>출처</dt><dd>${esc(m.src)}<br><a class="src-btn" href="${esc(m.url)}" target="_blank" rel="noopener">${ICON_NEWS}${isDam(m) ? "전문 보기" : "기사 보기"}</a></dd></div>
+      </dl>
+      <div>
+        <button class="listen" type="button" id="listen" data-id="${esc(m.id)}"></button>
+        <button class="share" type="button" id="share">${ICON_SHARE}카톡, 문자로 이 말씀 보내기</button>
+      </div>
+      <p class="about">${esc(m.about)}</p>
+      <p class="quote">${esc(m.quote)}</p>
+      <h3 class="section-title">쉽게 풀어 보면</h3>
+      <p class="ai-note">쉬운 말로 풀어 쓴 글입니다. 위 큰 글씨 말씀만 원문 그대로예요.</p>
+      <ol class="points">
+        ${m.points.map((p, i) => `<li><span>${i + 1}</span><span>${esc(p)}</span></li>`).join("")}
+      </ol>
+      <div class="todo">
+        <span class="k">오늘 해 볼 일 <small>(앱이 드리는 제안)</small></span>
+        <p>${esc(m.todo)}</p>
+      </div>
+      <div class="head"><a class="src-btn" href="${esc(m.url)}" target="_blank" rel="noopener">${ICON_NEWS}${isDam(m) ? "담화 전문 보기" : "원문 기사 보기"} (${esc(m.src)})</a></div>
+      <h3 class="section-title set-title">듣기 설정</h3>
+      ${pickHTML()}
+    </article>`;
+  const btn = document.getElementById("listen");
+  setListen(btn, detailOn && detailMsg === m.id);
+  btn.addEventListener("click", () => speak(m, btn));
+  document.getElementById("share").addEventListener("click", () => shareMsg(m));
+  bindPick(barVoice);
+  document.getElementById("back").addEventListener("click", () => { location.hash = ""; });
+  window.scrollTo(0, 0);
+}
+
+/* 라디오: 말씀을 문장 단위로 차례차례 읽고, 끝나면 다음 말씀으로 넘어감 */
+const ICON_RADIO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.2 6.1 17 1.5l.6 1.9L8.9 6H20a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7c0-.4.1-.7.2-.9zM7.5 18a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM14 11v2h5v-2h-5zm0 4v2h5v-2h-5z"/></svg>';
+const ICON_TRI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></svg>';
+let radioIdx = 0, radioOn = false, radioToken = 0;
+// 11/11 v38: 매일 말씀을 모두(새것부터) 듣고, 끝에 담화 1편. 다가오는 담화가 있으면 가장 가까운 것, 없으면 가장 최근 것
+function radioDam() {
+  const ds = MESSAGES.filter(isDam);
+  const up = ds.filter(m => daysTo(m.forDate) !== null && daysTo(m.forDate) >= 0).sort((a, b) => daysTo(a.forDate) - daysTo(b.forDate));
+  if (up.length) return up[0];
+  return ds.slice().sort((a, b) => String(b.forDate || b.pubDate || "").localeCompare(String(a.forDate || a.pubDate || "")))[0] || null;
+}
+const radioQueue = () => {
+  const d = radioDam();
+  // v49(11/12): 라디오도 목록처럼 말씀하신 날이 늦은 것부터(data.json은 올라온 순서라 섞여 있음)
+  return byDay(MESSAGES.filter(m => !isDam(m) && fresh(m) && (m.group !== "bishop" || m.diocese === diocese))).concat(d ? [d] : []);
+};
+function koVoice() { return canSpeak ? speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith("ko")) : null; }
+const ORDINAL = ["첫", "두", "세", "네", "다섯", "여섯", "일곱", "여덟", "아홉", "열"];
+
+/* 말씀 사이 종소리 */
+let audioCtx = null;
+function chime() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const t0 = audioCtx.currentTime + 0.05;
+    [[659.25, 0], [523.25, 0.45]].forEach(([f, dt]) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = "sine"; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t0 + dt);
+      g.gain.exponentialRampToValueAtTime(0.25, t0 + dt + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dt + 1.6);
+      o.connect(g).connect(audioCtx.destination);
+      o.start(t0 + dt); o.stop(t0 + dt + 1.7);
+    });
+  } catch (e) {}
+}
+
+function say(txt, onend, rate) {
+  const u = new SpeechSynthesisUtterance(txt);
+  u.lang = "ko-KR"; u.rate = rate || 0.88;
+  const v = koVoice(); if (v) u.voice = v;
+  if (onend) { u.onend = onend; u.onerror = onend; }
+  speechSynthesis.speak(u);
+}
+/* 원고 조각을 하나씩 차례로: 문장은 읽고, 숫자는 쉬고, 'chime'은 종소리 */
+function playSegs(segs, token, done) {
+  let i = 0;
+  const next = () => {
+    if (token !== radioToken || !radioOn) return;
+    if (i >= segs.length) { done(); return; }
+    const s = segs[i++];
+    if (typeof s === "number") playGap(s, next);
+    else if (s === "chime") next();
+    else if (typeof s === "object" && s.clip) playClip(s.clip, next, () => canSpeak ? playSegs(s.alt, token, next) : next());
+    else if (typeof s === "object") say(s.q, next, 0.78);
+    else say(s, next);
+  };
+  next();
+}
+function radioStop() { radioOn = false; radioToken++; stopClip(); if (canSpeak) speechSynthesis.cancel(); }
+/* 11/11 v35: 라디오는 오늘 차례 녹음(여는 말, 말씀들, 마무리)을 모두 받아 말씀 사이 쉼까지 넣어
+   소리 파일 하나(wav)로 이어 붙여 재생. 파일을 바꿔 끼울 때마다 생기던 빈틈(받는 중 기다림)과,
+   화면을 끈 갤럭시에서 다음 파일로 못 넘어가 끊기던 문제를 없앰. 하나라도 못 받으면 예전 방식(radioPlayClips). */
+let prog = null, progPrep = false;
+const PROG_RATE = 24000;
+const queueIds = q => voice + "|" + q.map(m => m.id).join(",");
+function clipBuffer(name) {
+  return new Promise((res, rej) => {
+    const c = loadClip(name), t0 = Date.now();
+    const step = () => {
+      if (c.url) return fetch(c.url).then(r => r.arrayBuffer()).then(res, rej);
+      if (c.done || Date.now() - t0 > 30000) return rej(new Error("load " + name));
+      setTimeout(step, 150);
+    };
+    step();
+  }).then(ab => new Promise((res, rej) => {
+    const ctx = new OfflineAudioContext(1, 1, PROG_RATE);
+    const p = ctx.decodeAudioData(ab, res, rej);
+    if (p && p.catch) p.catch(rej);
+  }));
+}
+async function buildProg(startIdx, first) {
+  const q = radioQueue();
+  const items = [];
+  if (first) items.push({ name: "open", idx: startIdx });
+  q.slice(startIdx).forEach((m, k) => items.push({ name: m.id, idx: startIdx + k }));
+  items.push({ name: "close", idx: q.length });
+  const bufs = await Promise.all(items.map(it => clipBuffer(it.name)));
+  const S = s => Math.round(s * PROG_RATE);
+  let pos = S(0.3);
+  items.forEach((it, i) => {
+    if (i) pos += S(items[i - 1].name === "open" ? 0.8 : 1.2);
+    it.start = pos / PROG_RATE; it.s0 = pos;
+    pos += bufs[i].length;
+    it.end = pos / PROG_RATE;
+  });
+  const total = pos + S(0.5);
+  const pcm = new Int16Array(total);
+  bufs.forEach((b, i) => {
+    const ch = [];
+    for (let c = 0; c < b.numberOfChannels; c++) ch.push(b.getChannelData(c));
+    const off = items[i].s0, n = b.length, k = ch.length;
+    for (let j = 0; j < n; j++) {
+      let x = 0;
+      for (let c = 0; c < k; c++) x += ch[c][j];
+      x /= k;
+      pcm[off + j] = x >= 1 ? 32767 : x <= -1 ? -32768 : Math.round(x * 32767);
+    }
+  });
+  const h = new DataView(new ArrayBuffer(44));
+  const w = (o, s) => { for (let i = 0; i < s.length; i++) h.setUint8(o + i, s.charCodeAt(i)); };
+  w(0, "RIFF"); h.setUint32(4, 36 + total * 2, true); w(8, "WAVE"); w(12, "fmt ");
+  h.setUint32(16, 16, true); h.setUint16(20, 1, true); h.setUint16(22, 1, true);
+  h.setUint32(24, PROG_RATE, true); h.setUint32(28, PROG_RATE * 2, true); h.setUint16(32, 2, true); h.setUint16(34, 16, true);
+  w(36, "data"); h.setUint32(40, total * 2, true);
+  const url = URL.createObjectURL(new Blob([h.buffer, pcm.buffer], { type: "audio/wav" }));
+  return { url, items, startIdx, first, ids: queueIds(q), curName: "" };
+}
+/* 11/11 v38: 녹음은 모두 같은 꼴(MPEG-2 3계층, 24kHz 모노 32kbps, 한 토막 96바이트에 0.024초)이라
+   풀지 않고 토막을 그대로 이어 붙임. 쉼도 소리 없는 토막으로. 30분이어도 7MB 남짓이라 오래된 폰도 가벼움.
+   꼴이 하나라도 다르면 null을 돌려 wav 방식(buildProg)으로 */
+/* v47(11/12): 새 목소리는 48kbps(토막 144바이트, 머리 FF F3 64 C4)로 올림. 비트레이트는 토막 머리에서 읽고,
+   한 방송 안 녹음이 모두 같은 비트레이트일 때만 이어 붙임(섞이면 길이, 넘기기가 틀어지니 wav 방식). 쉼 토막도 같은 비트레이트로 */
+const MP3_KBPS = { 0x4: 32, 0x6: 48, 0x8: 64 }, MP3_SPF = 576 / 24000;
+let MP3_HEAD = [0xFF, 0xF3, 0x44, 0xC4], MP3_F = 96;
+function clipBytes(name) {
+  return new Promise((res, rej) => {
+    const c = loadClip(name), t0 = Date.now();
+    const step = () => {
+      if (c.url) return fetch(c.url).then(r => r.arrayBuffer()).then(ab => res(new Uint8Array(ab)), rej);
+      if (c.done || Date.now() - t0 > 30000) return rej(new Error("load " + name));
+      setTimeout(step, 150);
+    };
+    step();
+  });
+}
+/* 녹음 하나가 한 꼴로만 되어 있으면 그 비트레이트(kbps), 아니면 0 */
+function mp3Kbps(b) {
+  if (b.length < 4) return 0;
+  const kb = MP3_KBPS[b[2] >> 4], f = kb * 3;   // MPEG-2 3계층 24kHz: 72*kbps*1000/24000 = 3*kbps 바이트
+  if (!kb || (b[2] & 0x0C) !== 0x04 || b.length % f) return 0;
+  for (let i = 0; i < b.length; i += f)
+    if (b[i] !== 0xFF || b[i + 1] !== 0xF3 || (b[i + 2] & 0xFD) !== (b[2] & 0xFD) || b[i + 3] !== 0xC4) return 0;
+  return kb;
+}
+/* v39: 말씀이 많으면(한 달 반 치) 처음엔 앞 PROG_HEAD편만 받아 바로 틀고, 그동안 나머지를 받아 두었다가
+   앞 묶음이 끝나면 나머지를 한 파일로 이어 틂(바꿔 끼우기는 한 번, 받아 둔 파일이라 인터넷 없이) */
+const PROG_HEAD = 6;
+let progWhole = false;
+async function buildProgMp3(startIdx, first) {
+  const q = radioQueue();
+  const rest = q.length - startIdx;
+  const cnt = (!progWhole && rest > PROG_HEAD + 2) ? PROG_HEAD : rest;
+  progWhole = false;
+  const endIdx = startIdx + cnt;
+  const items = [];
+  if (first) items.push({ name: "open", idx: startIdx });
+  q.slice(startIdx, endIdx).forEach((m, k) => items.push({ name: m.id, idx: startIdx + k }));
+  if (endIdx >= q.length) items.push({ name: "close", idx: q.length });
+  else { q.slice(endIdx).forEach(m => prefetchClip(m.id)); prefetchClip("close"); }
+  const arrs = await Promise.all(items.map(it => clipBytes(it.name)));
+  const kbs = arrs.map(mp3Kbps);
+  if (!kbs[0] || !kbs.every(k => k === kbs[0])) return null;
+  MP3_F = kbs[0] * 3; MP3_HEAD = [0xFF, 0xF3, arrs[0][2] & 0xF0 | 0x04, 0xC4];
+  const sil = s => { const n = Math.round(s / MP3_SPF), u = new Uint8Array(n * MP3_F); for (let i = 0; i < n; i++) u.set(MP3_HEAD, i * MP3_F); return u; };
+  const parts = [];
+  let t = 0;
+  const push = u => { parts.push(u); t += u.length / MP3_F * MP3_SPF; };
+  push(sil(0.3));
+  items.forEach((it, i) => {
+    if (i) push(sil(items[i - 1].name === "open" ? 0.8 : 1.2));
+    it.start = t;
+    push(arrs[i]);
+    it.end = t;
+  });
+  push(sil(0.5));
+  const url = URL.createObjectURL(new Blob(parts, { type: "audio/mpeg" }));
+  return { url, items, startIdx, endIdx, first, ids: queueIds(q), curName: "", total: t };
+}
+function progItemAt(t) {
+  let cur = prog.items[0];
+  for (const it of prog.items) if (t >= it.start - 0.6) cur = it;
+  return cur;
+}
+function startProg(t) {
+  const tk = ++playerToken;
+  player.loop = false;
+  curClip = "#prog"; prog.curName = "";
+  player.src = prog.url;
+  player.defaultPlaybackRate = player.playbackRate = rateNow();
+  try { player.preservesPitch = true; } catch (e) {}
+  player.onended = () => {
+    if (tk !== playerToken) return;
+    if (prog && prog.endIdx && prog.endIdx < radioQueue().length) { radioIdx = prog.endIdx; progWhole = true; radioPlay(false); return; }   // v39: 앞 묶음 끝, 나머지로
+    try { gtag("event", "radio_complete"); } catch (e) {}   // v45: 듣기를 끝까지
+    radioOn = false; radioIdx = 0; curClip = ""; renderRadio();
+  };
+  player.onerror = () => { if (tk !== playerToken) return; prog = null; radioPlayClips(false); };
+  if (t > 0) player.addEventListener("loadedmetadata", () => { if (tk === playerToken) player.currentTime = t; }, { once: true });
+  const p = player.play();
+  if (p && p.catch) p.catch(err => { if (tk === playerToken && err && err.name !== "AbortError") { prog = null; radioPlayClips(false); } });
+  progTick();
+}
+/* 한 파일 안에서 지금 어느 말씀인지 따라가며 화면, 잠금 화면 제목을 바꿈 */
+function progTick() {
+  if (!prog || curClip !== "#prog" || !radioOn) return;
+  const it = progItemAt(player.currentTime || 0);
+  if (it.name === prog.curName) return;
+  if (prog.curName && !prog.jumped) gaComplete(prog.curName);   // v45: 앞 말씀을 건너뛰지 않고 지나왔으면 끝까지 들음
+  prog.jumped = false;
+  prog.curName = it.name;
+  nb.t.textContent = barTitle(it.name);
+  setMedia(it.name);
+  if (it.name !== "open" && it.name !== "close") { const mm = MESSAGES.find(x => x.id === it.name); try { gtag("event", "msg_play", { msg: it.name, speaker: mm ? mm.speaker : "", radio: 1, voice: voice }); } catch (e) {} }
+  if (radioIdx !== it.idx) { radioIdx = it.idx; }
+  renderRadio();
+}
+player.addEventListener("timeupdate", progTick);
+player.addEventListener("seeking", () => { if (prog) prog.jumped = true; });   // v45: 넘기기, 다시 듣기는 끝까지 들음으로 안 셈
+player.addEventListener("seeked", progTick);
+function radioPlay(first, cont) {
+  if (detailOn) { detailOn = false; detailMsg = ""; syncListen(); }
+  if (cont || typeof OfflineAudioContext === "undefined") return radioPlayClips(first, cont);
+  if (!radioOn) { try { gtag("event", "radio_start"); } catch (e) {} }
+  const q = radioQueue();
+  if (canSpeak) speechSynthesis.cancel();
+  /* 이미 만든 파일이 지금 순서와 같으면 그 말씀 자리로 옮기기만 함 */
+  if (prog && prog.ids === queueIds(q) && radioIdx >= prog.startIdx && !(first && !prog.first)) {
+    const it = (first && prog.first) ? prog.items[0] : prog.items.find(x => x.idx === radioIdx && x.name !== "open");
+    if (it) {
+      radioToken++;
+      radioOn = true;
+      const at = it === prog.items[0] ? 0 : Math.max(0, it.start - 0.2);
+      if (curClip === "#prog" && player.src === prog.url) {
+        player.playbackRate = rateNow();
+        player.currentTime = at;
+        if (player.paused) player.play().catch(() => {});
+        prog.curName = ""; progTick();
+      } else startProg(at);
+      renderRadio();
+      return;
+    }
+  }
+  const token = ++radioToken;
+  holdBar = true; stopClip(); holdBar = false;
+  radioOn = true; progPrep = true;
+  renderRadio();
+  /* 준비하는 동안 소리 없는 쉼을 틀어 둠(누른 순간 재생을 시작해야 폰이 막지 않음).
+     v43: 재생창은 처음 나올 말씀 제목으로 바로 띄우고 막대는 0초에 멈춰 둠 */
+  playerToken++; curClip = "";
+  nb.t.textContent = first ? barTitle("open") : (q[radioIdx] ? barTitle(q[radioIdx].id) : "");
+  showBar(true); syncBar();
+  player.onended = null; player.onerror = null;
+  player.src = silentWav(); player.loop = true; player.playbackRate = 1;
+  player.play().catch(() => {});
+  buildProgMp3(radioIdx, first).then(p => p || buildProg(radioIdx, first)).then(p => {
+    progPrep = false;
+    if (token !== radioToken || !radioOn) { URL.revokeObjectURL(p.url); renderRadio(); return; }
+    if (prog) URL.revokeObjectURL(prog.url);
+    prog = p;
+    startProg(0);
+    renderRadio();
+  }).catch(() => {
+    progPrep = false;
+    if (token !== radioToken || !radioOn) return;
+    player.loop = false;
+    radioPlayClips(first);
+  });
+}
+/* 예전 방식: 녹음을 하나씩 바꿔 가며 재생(녹음이 없는 말씀은 폰 기본 음성). cont: 앞 말씀이 끝나 저절로 넘어갈 때 */
+function radioPlayClips(first, cont) {
+  if (!radioOn) { try { gtag("event", "radio_start"); } catch (e) {} }
+  const q = radioQueue();
+  const token = ++radioToken;
+  if (!cont) {
+    stopClip();
+    if (canSpeak) speechSynthesis.cancel();
+  }
+  radioOn = true;
+  renderRadio();
+  if (radioIdx >= q.length) {
+    playSegs(["chime", { clip: "close", alt: RADIO_CLOSE }], token, () => { radioOn = false; radioIdx = 0; renderRadio(); });
+    return;
+  }
+  const m = q[radioIdx];
+  const lead = whoShort(m) + " 말씀입니다.";
+  const body = { clip: m.id, alt: [lead, 800].concat(m.radio || [m.title, m.quote]) };
+  const segs = (first ? ["chime", { clip: "open", alt: RADIO_OPEN }, 800] : []).concat(["chime", body]);
+  prefetchClip(m.id);
+  /* 라디오를 켤 때 오늘 차례 녹음을 모두 받아 둠(한 편 250-570KB). 잠금 화면 중엔 인터넷이 막혀도 이어짐 */
+  if (!cont) { q.slice(radioIdx + 1).forEach(x => prefetchClip(x.id)); prefetchClip("close"); }
+  prefetchClip(q[radioIdx + 1] ? q[radioIdx + 1].id : "close");
+  playSegs(segs, token, () => {
+    radioIdx++;
+    renderRadio();
+    playGap(1200, () => { if (token === radioToken && radioOn) radioPlayClips(false, true); });
+  });
+}
+/* 방송 원고: 녹음과 같은 순서(앞머리 + 문장들). 쉬는 시간 숫자는 화면에 안 보임 */
+function scriptSegs(m) {
+  const lead = whoShort(m) + " 말씀입니다.";
+  return [lead].concat((m.radio || []).filter(s => typeof s !== "number"));
+}
+function scriptHTML(m) {
+  return scriptSegs(m).map((s, i) => typeof s === "object"
+    ? `<p class="quote" data-seg="${i}">${esc(s.q)}</p>`
+    : `<p data-seg="${i}">${esc(s)}</p>`).join("");
+}
+/* 지금 나오는 문장 표시: 녹음 안의 시간 정보가 없어서 글자 수 비율로 어림함 */
+function segBounds(m) {
+  const w = scriptSegs(m).map(s => {
+    const t = (typeof s === "object" ? s.q : s).replace(/\s/g, "").length;
+    return (typeof s === "object" ? t * 1.25 : t) + 6;   // 인용은 천천히, 문장 사이 쉼
+  });
+  const sum = w.reduce((a, b) => a + b, 0);
+  let acc = 0;
+  return w.map(x => (acc += x) / sum);
+}
+let lastSeg = -1;
+function markSeg() {
+  const box = document.getElementById("script-box");
+  if (!box || location.hash !== "#radio") return;
+  const q = radioQueue(), m = q[Math.min(radioIdx, q.length - 1)];
+  let idx = -1;
+  let f = -1;
+  if (m && player.duration && !player.paused) {
+    if (curClip === m.id) f = player.currentTime / player.duration;
+    else if (curClip === "#prog" && prog) {
+      const it = prog.items.find(x => x.name === m.id), t = player.currentTime;
+      if (it && t >= it.start && t <= it.end) f = (t - it.start) / (it.end - it.start);
+    }
+  }
+  if (f >= 0) {
+    const b = segBounds(m);
+    idx = b.findIndex(x => f < x);
+    if (idx < 0) idx = b.length - 1;
+  }
+  if (idx === lastSeg) return;
+  lastSeg = idx;
+  box.querySelectorAll("[data-seg]").forEach(p => p.classList.toggle("now", +p.dataset.seg === idx));
+  const cur = box.querySelector(".now");
+  if (cur && box.open) cur.scrollIntoView({ block: "center", behavior: "smooth" });
+}
+player.addEventListener("timeupdate", markSeg);
+player.addEventListener("pause", markSeg);
+let scriptOpen = false;
+/* 자동 꺼짐: 틀어 두고 주무셔도 정한 시간 뒤 저절로 멈춤. 매번 새로 고름(기억 안 함) */
+const SLEEPS = [[0, "안 함"], [15, "15분"], [30, "30분"], [60, "1시간"]];
+let sleepMin = 0, sleepAt = 0;
+function sleepLeft() {
+  const m = Math.max(1, Math.ceil((sleepAt - Date.now()) / 60000));
+  return "(" + m + "분 뒤 꺼짐)";
+}
+function setSleep(min) {
+  sleepMin = min; sleepAt = min ? Date.now() + min * 60000 : 0;
+  view.querySelectorAll("[data-sleep]").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.sleep === min)));
+  toast(min ? (min === 60 ? "1시간" : min + "분") + " 뒤에 저절로 꺼집니다" : "자동 꺼짐을 껐습니다");
+  renderRadio();
+}
+function sleepCheck() {
+  if (!sleepAt) return;
+  if (Date.now() >= sleepAt) {
+    sleepAt = 0; sleepMin = 0;
+    radioStop(); stopSpeak();
+    renderRadio();
+    toast("정한 시간이 되어 껐습니다. 편히 주무세요");
+    return;
+  }
+  const el = document.getElementById("sleep-left");
+  if (el) el.textContent = sleepLeft();
+}
+player.addEventListener("timeupdate", sleepCheck);
+setInterval(sleepCheck, 5000);
+function renderRadio() { if (location.hash === "#radio") radio(); }
+
+function radio() {
+  const q = radioQueue();
+  if (!radioOn && radioIdx >= q.length) radioIdx = 0;
+  const m = q[Math.min(radioIdx, q.length - 1)];
+  const s = SPEAKERS[m.speaker];
+  const playLabel = radioOn ? "잠깐 멈추기" : (radioIdx === 0 ? "말씀 듣기" : "이어서 듣기");
+  view.innerHTML = `
+    <div class="stack">
+      <button class="back" type="button" id="back">&larr; 처음으로</button>
+      <div class="radio-card" aria-live="polite">
+        ${photoHTML(m)}
+        <span class="onair ${radioOn ? "on" : ""}">${radioOn ? "지금 나오는 말씀" : "멈춤"}</span>
+        <span class="who ${s.cls}${WHO_GONE}">${esc(s.label)}</span>
+        <span class="t">${esc(m.title)}</span>
+        <span class="d">${radioIdx + 1 > q.length ? q.length : radioIdx + 1}번째 말씀, 모두 ${q.length}개</span>
+      </div>
+      <button class="radio-main" type="button" id="r-play">
+        ${radioOn ? (progPrep ? '<span class="spin" aria-hidden="true"></span>' : ICON_STOP) : ICON_TRI}<span>${playLabel}</span>
+      </button>
+      ${showBatteryTip ? `<div class="tip" id="battery-tip" role="note">
+        <p>화면이 꺼진 동안 소리가 멈췄다가 다시 이어졌어요.</p>
+        <p>자꾸 멈추면 폰 <b>설정</b>에서 <b>애플리케이션</b>, <b>Chrome</b>, <b>배터리</b>로 들어가 <b>제한 없음</b>을 골라 주세요.</p>
+        <button type="button" id="tip-ok">알겠어요</button>
+      </div>` : ""}
+      <div class="radio-nav">
+        <button type="button" id="r-prev">&larr; 이전 말씀</button>
+        <button type="button" id="r-next">다음 말씀 &rarr;</button>
+        <button type="button" class="again" id="r-again">&#8635; 이 말씀 처음부터 다시 듣기</button>
+      </div>
+      <button class="share" type="button" id="r-share">${ICON_SHARE}카톡, 문자로 이 말씀 보내기</button>
+      <h3 class="section-title">오늘의 순서</h3>
+      <ol class="playlist">
+        ${q.map((x, i) => `<li><button type="button" id="pl-${x.id}" data-idx="${i}" aria-current="${i === radioIdx}">
+          <span class="n">${i + 1}</span><span>${POPE_ONLY ? "" : esc(SPEAKERS[x.speaker].label) + "<br>"}${esc(x.title)}<small class="pd">${esc(x.year && !/년/.test(x.date || "") ? x.year + "년 " : "")}${esc(x.date || "")}${isDam(x) ? " 발표" : ""}</small></span></button></li>`).join("")}
+      </ol>
+      <details class="script" id="script-box" ${scriptOpen ? "open" : ""}>
+        <summary>지금 말씀의 방송 원고 보기</summary>
+        <div class="script-body">${scriptHTML(m)}</div>
+      </details>
+      <h3 class="section-title set-title">듣기 설정</h3>
+      ${pickHTML()}
+      <div class="pick">
+        <span class="k">자동 꺼짐${sleepAt ? ` <span class="sleep-left" id="sleep-left">${sleepLeft()}</span>` : ""}</span>
+        <div class="pick-row four">${SLEEPS.map(([k, l]) => `<button type="button" data-sleep="${k}" aria-pressed="${k === sleepMin}">${l}</button>`).join("")}</div>
+      </div>
+    </div>`;
+  document.getElementById("back").addEventListener("click", () => { location.hash = ""; });
+  document.getElementById("r-play").addEventListener("click", () => {
+    if (radioOn) { radioStop(); renderRadio(); } else radioPlay(radioIdx === 0);
+  });
+  const jump = i => { radioIdx = Math.max(0, Math.min(q.length - 1, i)); radioOn ? radioPlay(false) : renderRadio(); };
+  document.getElementById("r-prev").addEventListener("click", () => jump(radioIdx - 1));
+  document.getElementById("r-next").addEventListener("click", () => jump(radioIdx + 1));
+  document.getElementById("r-again").addEventListener("click", () => { try { gtag("event", "radio_again"); } catch (e) {} radioPlay(false); });
+  document.getElementById("r-share").addEventListener("click", () => shareMsg(m));
+  const tipOk = document.getElementById("tip-ok");
+  if (tipOk) tipOk.addEventListener("click", () => { showBatteryTip = false; renderRadio(); });
+  view.querySelectorAll("[data-idx]").forEach(b => b.addEventListener("click", () => { radioIdx = +b.dataset.idx; radioPlay(false); }));
+  bindPick(barVoice);
+  view.querySelectorAll("[data-sleep]").forEach(b => b.addEventListener("click", () => setSleep(+b.dataset.sleep)));
+  const sb = document.getElementById("script-box");
+  sb.addEventListener("toggle", () => { scriptOpen = sb.open; lastSeg = -2; markSeg(); });
+  lastSeg = -2; markSeg();
+}
+
+function route() {
+  const id = location.hash.replace("#", "");
+  document.body.classList.toggle("inner", !!id);
+  if (id === "radio") { radio(); window.scrollTo(0, 0); syncBubble(); return; }
+  // v51: 다른 화면으로 가도 듣던 것은 계속(아래 재생창에서 멈추거나 끔)
+  const m = MESSAGES.find(x => x.id === id);
+  if (m) { try { gtag("event", "msg_open", { msg: m.id, speaker: m.speaker }); } catch (e) {} }
+  m ? detail(m) : home();
+  syncBubble();
+}
+{ const sa = document.getElementById("share-app"); sa.insertAdjacentHTML("afterbegin", ICON_SHARE); sa.addEventListener("click", shareApp); }
+window.addEventListener("hashchange", route);
+/* 말씀은 data.json에서 읽는다(매일 새벽 자동으로 바뀜) */
+fetch("data.json", { cache: "no-store" }).then(r => r.json()).then(d => {
+  SPEAKERS = d.speakers; DIOCESE_SPEAKER = d.dioceseSpeaker || {}; MESSAGES = POPE_ONLY ? d.messages.filter(m => m.group === "pope") : d.messages;
+  RADIO_OPEN = d.open; RADIO_CLOSE = d.close; DATA_VER = d.ver;
+  const up = document.getElementById("updated");
+  if (up && d.updatedLabel) up.textContent = d.updatedLabel;
+  route();
+}).catch(() => {
+  view.innerHTML = '<div class="empty"><p>말씀을 불러오지 못했습니다. 인터넷이 연결되어 있는지 확인하고 다시 열어 주세요.</p></div>';
+});
+
+/* v50 앱 설치 띠(맨 위): 크롬 설치 신호가 오면 '앱 설치'가 바로 설치 창, 아니면 누를 때 방법을 띠 안에 펼침.
+   카카오톡 안이면 크롬으로 열기, 아이폰은 사파리 '홈 화면에 추가' 안내. 닫으면 다시 안 띄움(installHide) */
+(function () {
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  const ua = navigator.userAgent, bar = document.getElementById("appbar"), sub = document.getElementById("ab-sub"),
+        go = document.getElementById("ab-go"), help = document.getElementById("ab-help");
+  const installed = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  let hide = false; try { hide = localStorage.getItem("installHide") === "1"; } catch (e) {}
+  if (installed || hide) return;
+  const ga = (n, p) => { try { gtag("event", n, p || {}); } catch (e) {} };
+  let act = null;
+  // label: 흰 단추 글자, fn: 누르면 할 일. how: 누르면 띠 안에 펼칠 설명(fn이 없을 때)
+  const show = (subText, label, fn, how) => {
+    if (subText) sub.textContent = subText;
+    go.textContent = label;
+    act = fn || (() => { help.textContent = how; help.hidden = !help.hidden; });
+    bar.hidden = false;
+  };
+  go.onclick = () => { ga("install_click", { label: go.textContent }); if (act) act(); };
+  document.getElementById("ab-x").onclick = () => { bar.hidden = true; ga("install_close"); try { localStorage.setItem("installHide", "1"); } catch (e) {} };
+  const android = /Android/i.test(ua), ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  if (/KAKAOTALK/i.test(ua)) {
+    const ext = "kakaotalk://web/openExternal?url=" + encodeURIComponent(location.href.split("#")[0]);
+    if (android) { location.href = ext; show("크롬에서 열면 설치할 수 있어요", "크롬에서 열기", () => { location.href = ext; }); }
+    else show("사파리에서 열면 설치할 수 있어요", "방법 보기", null, "오른쪽 아래 ⋯ 를 누르고 '다른 브라우저로 열기'(사파리)를 고른 뒤, 공유 버튼 ⬆ 에서 '홈 화면에 추가'를 눌러 주세요.");
+    return;
+  }
+  if (/NAVER\(inapp|Instagram|FBAN|FBAV|Line\//i.test(ua)) {
+    show("크롬이나 사파리에서 설치할 수 있어요", "방법 보기", null, "메뉴에서 '다른 브라우저로 열기'를 눌러 크롬이나 사파리에서 열어 주세요.");
+    return;
+  }
+  if (ios) { show(null, "방법 보기", null, "사파리 아래쪽 공유 버튼 ⬆ 을 누르고 '홈 화면에 추가'를 눌러 주세요."); return; }
+  let got = false;
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault(); got = true; help.hidden = true;
+    show(null, "앱 설치", async () => {
+      e.prompt(); const r = await e.userChoice; ga("install_result", { outcome: r.outcome });
+      if (r.outcome === "accepted") bar.hidden = true;
+    });
+  });
+  window.addEventListener("appinstalled", () => { bar.hidden = true; });
+  if (android) setTimeout(() => {
+    if (!got) show(null, "앱 설치", null, "오른쪽 위 점 세 개(⋮) 메뉴에서 '홈 화면에 추가' 또는 '앱 설치'를 눌러 주세요. 삼성 인터넷은 아래쪽 메뉴(≡)에서 '현재 페이지 추가', '홈 화면'을 눌러 주세요.");
+  }, 4000);
+})();
+</script>
